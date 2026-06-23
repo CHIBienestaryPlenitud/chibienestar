@@ -1,0 +1,3523 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienestar y Plenitud Integral</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+/* ==========================================
+   Bienestar y Plenitud Integral - Design System
+   ========================================== */
+
+/* Variables CSS */
+:root {
+    --bg-main: #f0f4f8; /* Fondo azul tenue */
+    --bg-card: rgba(255, 255, 255, 0.75); /* Tarjetas blancas translúcidas (glassmorphism) */
+    --bg-card-hover: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(20, 184, 166, 0.1);
+    --border-color-focus: rgba(20, 184, 166, 0.35);
+    
+    --color-primary: #14b8a6; /* Verde Aqua / Teal */
+    --color-primary-light: #2dd4bf;
+    --color-primary-dark: #0f766e;
+    
+    --color-success: #14b8a6; /* Verde Aqua */
+    --color-success-light: #0d9488;
+    --color-success-bg: rgba(20, 184, 166, 0.1);
+
+    --color-danger: #f97316; /* Naranja */
+    --color-danger-light: #ea580c;
+    --color-danger-bg: rgba(249, 115, 22, 0.1);
+    
+    --color-warning: #f59e0b;
+    --color-text-main: #1e293b; /* Texto principal oscuro */
+    --color-text-muted: #64748b; /* Texto secundario gris azulado */
+    
+    --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+    
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset y Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #e6f0fa 0%, #f0f4f8 100%); /* Fondo azul tenue radial/lineal */
+    color: var(--color-text-main);
+    min-height: 100vh;
+    padding: 1.5rem;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(20, 184, 166, 0.2);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+/* App Container Layout */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+}
+
+.brand-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.brand-logo {
+    max-height: 55px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+}
+
+.brand-logo:hover {
+    transform: scale(1.04);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo i {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+}
+
+.logo h1 span {
+    color: var(--color-primary);
+}
+
+/* Tab/Timeframe Selector */
+.timeframe-selector {
+    display: flex;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.btn-tab {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    padding: 0.6rem 1.2rem;
+    border-radius: 9px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-fast);
+}
+
+.btn-tab:hover {
+    color: var(--color-text-main);
+}
+
+.btn-tab.active {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.25);
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-left, .dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* KPI Container and Cards */
+.kpi-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .kpi-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.kpi-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+}
+
+.kpi-card:hover {
+    transform: translateY(-4px);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.balance-card::before {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+}
+.income-card::before {
+    background: var(--color-success);
+}
+.expense-card::before {
+    background: var(--color-danger);
+}
+
+.kpi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.kpi-header i {
+    font-size: 1.1rem;
+}
+
+.kpi-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+}
+
+.kpi-trend, .kpi-subtitle {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Glass Card */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 0.75rem;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #0f172a;
+}
+
+.card-header h2 i {
+    color: var(--color-primary);
+}
+
+/* Forms styling */
+.form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--border-color-focus);
+    background: #ffffff;
+}
+
+/* Toggle Switch / Checkbox Group */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--color-primary);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--color-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+    transition: var(--transition-fast);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.35);
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Charts Card styling */
+.charts-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Transaction List & Filter Bar */
+.filter-bar {
+    display: flex;
+    gap: 0.75rem;
+}
+
+@media (max-width: 480px) {
+    .filter-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.filter-bar input {
+    flex: 1;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.filter-bar select {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.transaction-list-wrapper {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.transaction-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.empty-list-msg {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2rem 0;
+    font-style: italic;
+}
+
+/* Transaction Item */
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    transition: var(--transition-fast);
+    animation: slideIn 0.3s ease-out;
+}
+
+.transaction-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(20, 184, 166, 0.15);
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.item-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.item-icon.income {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.item-icon.expense {
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+}
+
+.item-meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.item-meta span::after {
+    content: '•';
+    margin-left: 0.5rem;
+}
+
+.item-meta span:last-child::after {
+    content: '';
+}
+
+.item-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.item-amount {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.item-amount.income {
+    color: var(--color-success);
+}
+
+.item-amount.expense {
+    color: var(--color-danger);
+}
+
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.btn-delete:hover {
+    color: var(--color-danger);
+    background: rgba(249, 115, 22, 0.08);
+}
+
+/* Helpers */
+.text-success { color: var(--color-success) !important; }
+.text-danger { color: var(--color-danger) !important; }
+
+/* Micro-animations */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+.pulse-icon {
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    .app-header {
+        flex-direction: column;
+        gap: 1.25rem;
+        align-items: center;
+        text-align: center;
+    }
+    .brand-logo-container {
+        justify-content: center;
+        width: 100%;
+    }
+    .timeframe-selector {
+        width: 100%;
+    }
+    .btn-tab {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   Videos Section & Cards
+   ========================================== */
+.videos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.add-video-bar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.add-video-bar input {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 220px;
+}
+
+.btn-add-video {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    box-shadow: 0 2px 8px rgba(20, 184, 166, 0.2);
+    transition: var(--transition-fast);
+}
+
+.btn-add-video:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.video-card-item {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.video-card-item:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: var(--shadow-md);
+}
+
+.video-thumbnail-container {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background: #000;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.video-card-item:hover .video-thumbnail {
+    transform: scale(1.05);
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: var(--transition-fast);
+}
+
+.play-overlay i {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: var(--transition-fast);
+}
+
+.video-thumbnail-container:hover .play-overlay {
+    background: rgba(15, 23, 42, 0.4);
+    opacity: 1;
+}
+
+.video-thumbnail-container:hover .play-overlay i {
+    transform: scale(1.15);
+    color: var(--color-primary-light);
+}
+
+.video-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+}
+
+.video-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.3;
+}
+
+.video-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.video-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.btn-watch {
+    background: transparent;
+    border: none;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0;
+}
+
+.btn-watch:hover {
+    color: var(--color-primary);
+}
+
+.btn-delete-video {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.btn-delete-video:hover {
+    color: var(--color-danger);
+    background: var(--color-danger-bg);
+}
+
+/* Modal Player styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #000;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2.2rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--color-primary-light);
+    transform: scale(1.1);
+}
+
+.video-iframe-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.video-iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .videos-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .add-video-bar {
+        width: 100%;
+    }
+    .add-video-bar input {
+        flex: 1;
+        min-width: auto;
+    }
+}
+
+/* ==========================================
+   Secciones de Salud - Navigation Bar
+   ========================================== */
+.health-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+}
+
+.health-btn {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--color-text-muted);
+    padding: 0.9rem 1.8rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: visible;
+}
+
+.health-btn:hover {
+    color: var(--color-text-main);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--bg-card-hover);
+}
+
+/* Active buttons styling */
+.health-btn.active#btn-financiera {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);
+}
+
+.health-btn.active#btn-emocional {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.health-btn.active#btn-espiritual {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+}
+
+/* Glowing effects on click */
+.health-btn.glow-financiera {
+    animation: buttonGlowFinanciera 2s ease-in-out 5;
+}
+@keyframes buttonGlowFinanciera {
+    0%, 100% { box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(20, 184, 166, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+.health-btn.glow-emocional {
+    animation: buttonGlowEmocional 2s ease-in-out 5;
+}
+@keyframes buttonGlowEmocional {
+    0%, 100% { box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+.health-btn.glow-espiritual {
+    animation: buttonGlowEspiritual 2s ease-in-out 5;
+}
+@keyframes buttonGlowEspiritual {
+    0%, 100% { box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(249, 115, 22, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+/* ==========================================
+   Animaciones & Partículas (JS Spawners)
+   ========================================== */
+.sparkle-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1100;
+    font-size: 1.4rem;
+    animation: none; /* Controlado dinámicamente por JS */
+}
+
+.changing-face-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1100;
+    font-size: 2.2rem;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+    animation: floatUpAndChange 10s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes floatUpAndChange {
+    0% { transform: translateY(0) scale(0.6); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-40px) scale(1.3); opacity: 0; }
+}
+
+/* ==========================================
+   Tibetan Monk Animation
+   ========================================== */
+.monk-container {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1050;
+    width: 32px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+}
+
+.monk-character {
+    width: 24px;
+    height: 38px;
+    position: relative;
+    z-index: 2;
+}
+
+.monk-head {
+    width: 12px;
+    height: 12px;
+    background: #ffd3b6;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Cara sonriente del monje */
+.monk-head::before {
+    content: '◡';
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    font-size: 8px;
+    color: #475569;
+    font-weight: bold;
+}
+
+.monk-tunic {
+    width: 18px;
+    height: 20px;
+    background: #f97316; /* Túnica naranja */
+    border-radius: 6px 6px 2px 2px;
+    margin: -1px auto 0;
+    position: relative;
+    border-left: 3px solid #ea580c; /* Detalle de doble pliegue */
+}
+
+.monk-legs {
+    display: flex;
+    justify-content: space-between;
+    width: 16px;
+    margin: 0 auto;
+    position: relative;
+    z-index: -1;
+}
+
+.monk-legs .leg {
+    width: 6px;
+    height: 8px;
+    background: #ea580c;
+    border-radius: 0 0 2px 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animaciones del Monje Caminando */
+.monk-container.walking {
+    animation: walkBob 0.25s infinite alternate ease-in-out;
+}
+@keyframes walkBob {
+    from { transform: translateY(0); }
+    to { transform: translateY(-3px); }
+}
+
+.monk-container.walking .left-leg {
+    animation: swingLeft 0.25s infinite alternate ease-in-out;
+}
+@keyframes swingLeft {
+    from { transform: rotate(-25deg); }
+    to { transform: rotate(25deg); }
+}
+
+.monk-container.walking .right-leg {
+    animation: swingRight 0.25s infinite alternate ease-in-out;
+}
+@keyframes swingRight {
+    from { transform: rotate(25deg); }
+    to { transform: rotate(-25deg); }
+}
+
+/* Animaciones del Monje Meditando */
+.monk-container.meditating {
+    animation: levitate 2s infinite ease-in-out alternate;
+}
+@keyframes levitate {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3.5px); }
+}
+
+/* Piernas cruzadas al meditar */
+.monk-container.meditating .monk-legs {
+    width: 26px;
+    margin-top: -2px;
+}
+.monk-container.meditating .leg {
+    height: 4px;
+    width: 12px;
+    border-radius: 4px;
+}
+.monk-container.meditating .left-leg {
+    transform: rotate(15deg);
+    margin-right: -4px;
+}
+.monk-container.meditating .right-leg {
+    transform: rotate(-15deg);
+    margin-left: -4px;
+}
+
+/* Aura espiritual de meditación */
+.monk-aura {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 44px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px dashed rgba(249, 115, 22, 0.4);
+    opacity: 0;
+    display: none;
+    z-index: 1;
+}
+
+.monk-container.meditating .monk-aura {
+    display: block;
+    animation: auraPulse 2s infinite ease-out;
+}
+
+@keyframes auraPulse {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.8;
+        border-color: rgba(249, 115, 22, 0.5);
+        box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+        border-color: rgba(251, 146, 60, 0);
+        box-shadow: 0 0 25px rgba(249, 115, 22, 0);
+    }
+}
+
+/* ==========================================
+   Page Sections Layout & Common Styles
+   ========================================== */
+.page-section {
+    animation: sectionFadeIn 0.4s ease-out forwards;
+    width: 100%;
+}
+
+@keyframes sectionFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title-wrapper {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 1rem;
+}
+
+.section-title-wrapper h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #0f172a;
+    margin-bottom: 0.35rem;
+}
+
+.section-title-wrapper p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.text-brain { color: #6366f1 !important; }
+.text-spiritual { color: #f97316 !important; }
+
+.subsection-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.subsection-title i {
+    color: var(--color-primary);
+}
+
+/* ==========================================
+   Books Grid & 3D Cards
+   ========================================== */
+.books-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.book-card {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1.75rem;
+    transition: var(--transition-normal);
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 640px) {
+    .book-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+}
+
+/* 3D Book Jacket Effect */
+.book-cover-wrapper {
+    width: 130px;
+    height: 190px;
+    border-radius: 4px 10px 10px 4px;
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    box-shadow: 8px 8px 18px rgba(15, 23, 42, 0.18);
+    overflow: hidden;
+}
+
+.book-spine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.22);
+    z-index: 2;
+}
+
+.book-cover-content {
+    width: 100%;
+    height: 100%;
+    padding: 1.25rem 0.75rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    text-align: left;
+}
+
+.book-cover-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.book-cover-author {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Libros Cobertores Degradados Personalizados */
+.agreement-cover {
+    background: linear-gradient(135deg, #8d6e63 0%, #3e2723 100%);
+    border-right: 3px solid #3e2723;
+}
+.intelligence-cover {
+    background: linear-gradient(135deg, #3f51b5 0%, #1a237e 100%);
+    border-right: 3px solid #1a237e;
+}
+.subtle-cover {
+    background: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
+    border-right: 3px solid #1f2937;
+}
+.power-cover {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+    border-right: 3px solid #0369a1;
+}
+.siddhartha-cover {
+    background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+    border-right: 3px solid #b45309;
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+}
+
+.book-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.book-author {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.book-review {
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--color-primary);
+    margin: 0.5rem 0 0.8rem;
+    line-height: 1.45;
+}
+
+#section-emocional .book-review {
+    border-left-color: #6366f1; /* Color índigo para emocional */
+}
+
+#section-espiritual .book-review {
+    border-left-color: #f97316; /* Color naranja para espiritual */
+}
+
+/* Botón de Reseña de Video */
+.btn-video-review {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: fit-content;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+    transition: var(--transition-fast);
+}
+
+.btn-video-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.35);
+    background: linear-gradient(135deg, #f87171, #ef4444);
+}
+
+.btn-video-review:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   Meditations Grid & Cards
+   ========================================== */
+.meditations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.meditation-card {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.meditation-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: var(--shadow-md);
+}
+
+.meditation-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background: #000;
+    overflow: hidden;
+}
+
+.meditation-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.meditation-card:hover .meditation-thumbnail {
+    transform: scale(1.05);
+}
+
+.meditation-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: var(--transition-fast);
+}
+
+.meditation-play-overlay i {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: var(--transition-fast);
+}
+
+.meditation-card:hover .meditation-play-overlay {
+    background: rgba(15, 23, 42, 0.35);
+    opacity: 1;
+}
+
+.meditation-card:hover .meditation-play-overlay i {
+    transform: scale(1.15);
+    color: #f97316;
+}
+
+.meditation-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.meditation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.3;
+}
+
+.meditation-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+}
+
+/* ==========================================
+   Spiritual Health - Meditations & Comments
+   ========================================== */
+.add-meditation-bar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.add-meditation-bar input {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 220px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--color-text-main);
+    transition: var(--transition-fast);
+}
+.add-meditation-bar input:focus {
+    outline: none;
+    border-color: #f97316;
+    background: white;
+}
+.btn-add-meditation {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+.btn-add-meditation:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+.meditation-comments-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #f97316;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.55rem 0 0.25rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 0.5rem;
+    transition: var(--transition-fast);
+}
+.meditation-comments-toggle:hover {
+    opacity: 0.8;
+}
+.meditation-comments-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-top: 0.75rem;
+}
+.meditation-comments-panel.active {
+    display: flex;
+}
+.comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+.comments-list::-webkit-scrollbar {
+    width: 4px;
+}
+.comments-list::-webkit-scrollbar-thumb {
+    background-color: rgba(249, 115, 22, 0.2);
+    border-radius: 4px;
+}
+.comment-item {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    background: rgba(249, 115, 22, 0.04);
+    border-left: 2px solid #f97316;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    color: var(--color-text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.comment-text {
+    word-break: break-word;
+}
+.comment-meta {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-align: right;
+}
+.comment-form {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+}
+.comment-input {
+    flex: 1;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-main);
+    transition: var(--transition-fast);
+}
+.comment-input:focus {
+    outline: none;
+    border-color: #f97316;
+    background: white;
+}
+.btn-submit-comment {
+    background: #f97316;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.btn-submit-comment:hover {
+    background: #ea580c;
+    transform: scale(1.05);
+}
+.no-comments-msg {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .health-nav {
+        gap: 0.75rem;
+    }
+    .health-btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+    }
+    .add-meditation-bar {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .add-meditation-bar input {
+        min-width: auto;
+    }
+}
+
+/* ==========================================
+   Portada - Chi Bienestar
+   ========================================== */
+.health-btn.active#btn-inicio {
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+.health-btn.glow-inicio {
+    animation: buttonGlowInicio 2s ease-in-out 5;
+}
+
+@keyframes buttonGlowInicio {
+    0%, 100% { box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+.welcome-section {
+    position: relative;
+    padding: 3.5rem 2.5rem;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%); /* Fondo azul claro y aqua */
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.welcome-hero {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
+    z-index: 1;
+}
+
+.welcome-icon {
+    font-size: 4rem;
+    color: #0f766e;
+    margin-bottom: 0.25rem;
+    animation: pulseIcon 3s infinite ease-in-out;
+}
+
+.welcome-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+}
+
+.welcome-subtitle {
+    font-size: 1.15rem;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.welcome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    z-index: 1;
+}
+
+.welcome-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2.25rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+.welcome-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-lg);
+}
+
+.welcome-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.welcome-card-header i {
+    font-size: 2rem;
+}
+
+.welcome-card-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.welcome-card-text {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.btn-welcome {
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: white;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-welcome:hover {
+    transform: translateY(-2px);
+}
+
+/* Bordes y textos por sección */
+.border-financiera {
+    border-left: 5px solid #14b8a6;
+}
+.text-financiera {
+    color: #0f766e;
+}
+.btn-financiera-welcome {
+    background: linear-gradient(135deg, #14b8a6, #0f766e);
+}
+.btn-financiera-welcome:hover {
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+}
+
+.border-emocional {
+    border-left: 5px solid #6366f1;
+}
+.text-emocional {
+    color: #4f46e5;
+}
+.btn-emocional-welcome {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+.btn-emocional-welcome:hover {
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.border-espiritual {
+    border-left: 5px solid #f97316;
+}
+.text-espiritual {
+    color: #ea580c;
+}
+.btn-espiritual-welcome {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+.btn-espiritual-welcome:hover {
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+}
+
+/* Decoraciones de Fondo para Portada */
+.home-bg-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.home-spiral {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    color: rgba(20, 184, 166, 0.12); /* Aqua claro con baja opacidad */
+}
+
+.home-spiral-1 {
+    top: -150px;
+    left: -150px;
+    transform: rotate(15deg);
+}
+
+.home-spiral-2 {
+    bottom: -150px;
+    right: -150px;
+    transform: rotate(195deg);
+}
+
+.orange-flare {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.18) 0%, rgba(249, 115, 22, 0) 70%);
+    filter: blur(60px);
+}
+
+.flare-1 {
+    top: 5%;
+    right: 5%;
+}
+
+.flare-2 {
+    bottom: 10%;
+    left: 5%;
+}
+
+@media (max-width: 950px) {
+    .welcome-grid {
+        grid-template-columns: 1fr;
+    }
+    .welcome-section {
+        padding: 2rem 1.5rem;
+    }
+    .welcome-hero {
+        padding: 2rem;
+    }
+    .welcome-title {
+        font-size: 2.25rem;
+    }
+}
+
+
+
+</style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Header -->
+        <header class="app-header">
+            <div class="logo" onclick="switchSection('inicio')" style="cursor: pointer;">
+                <i class="fa-solid fa-spa pulse-icon"></i>
+                <h1>Bienestar y <span>Plenitud</span></h1>
+            </div>
+            <div class="timeframe-selector">
+                <button id="btn-semanal" class="btn-tab active" onclick="changeTimeframe('semanal')">
+                    <i class="fa-solid fa-calendar-week"></i> Semanal
+                </button>
+                <button id="btn-mensual" class="btn-tab" onclick="changeTimeframe('mensual')">
+                    <i class="fa-solid fa-calendar-days"></i> Mensual
+                </button>
+            </div>
+            <div class="brand-logo-container">
+                <img src="logo.png" alt="CHI México Logo" class="brand-logo">
+            </div>
+        </header>
+
+        <!-- Barra de Navegación de Secciones de Salud CHI -->
+        <nav class="health-nav">
+            <button class="health-btn active" id="btn-inicio" onclick="switchSection('inicio')">
+                <i class="fa-solid fa-house"></i> Inicio
+            </button>
+            <button class="health-btn" id="btn-financiera" onclick="switchSection('financiera')">
+                <i class="fa-solid fa-scale-balanced"></i> Salud Financiera
+            </button>
+            <button class="health-btn" id="btn-emocional" onclick="switchSection('emocional')">
+                <i class="fa-solid fa-brain"></i> Salud Emocional
+            </button>
+            <button class="health-btn" id="btn-espiritual" onclick="switchSection('espiritual')">
+                <i class="fa-solid fa-om"></i> Salud Espiritual
+            </button>
+        </nav>
+
+        <main class="app-main-content">
+            <!-- SECCIÓN 0: INICIO (PORTADA CHI BIENESTAR) -->
+            <div id="section-inicio" class="welcome-section">
+                <div class="home-bg-decorations">
+                    <!-- Espirales Archimedean SVG (Siluetas ligeras) -->
+                    <svg class="home-spiral home-spiral-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50,50 A 5,5 0 0,1 45,50 A 10,10 0 0,0 55,50 A 15,15 0 0,1 35,50 A 20,20 0 0,0 65,50 A 25,25 0 0,1 25,50 A 30,30 0 0,0 75,50 A 35,35 0 0,1 15,50 A 40,40 0 0,0 85,50" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                    </svg>
+                    <svg class="home-spiral home-spiral-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50,50 A 5,5 0 0,1 45,50 A 10,10 0 0,0 55,50 A 15,15 0 0,1 35,50 A 20,20 0 0,0 65,50 A 25,25 0 0,1 25,50 A 30,30 0 0,0 75,50 A 35,35 0 0,1 15,50 A 40,40 0 0,0 85,50" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                    </svg>
+                    <!-- Destellos naranja difuminados -->
+                    <div class="orange-flare flare-1"></div>
+                    <div class="orange-flare flare-2"></div>
+                </div>
+
+                <div class="welcome-hero">
+                    <i class="fa-solid fa-spa welcome-icon"></i>
+                    <h2 class="welcome-title">Chi Bienestar</h2>
+                    <p class="welcome-subtitle">Te damos la bienvenida a tu portal de transformación. Un espacio diseñado para quienes buscan elevar su calidad de vida e integrar de manera práctica el bienestar en su día a día.</p>
+                </div>
+
+                <div class="welcome-grid">
+                    <!-- Salud Financiera Card -->
+                    <div class="welcome-card glass-card border-financiera">
+                        <div class="welcome-card-header text-financiera">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                            <h3>Salud Financiera</h3>
+                        </div>
+                        <p class="welcome-card-text">Aprende qué es un flujo de efectivo y cómo registrar tus movimientos para administrar mejor tus recursos económicos y reducir el estrés financiero.</p>
+                        <button class="btn-welcome btn-financiera-welcome" onclick="switchSection('financiera')">
+                            <i class="fa-solid fa-chart-line"></i> Explorar Salud Financiera
+                        </button>
+                    </div>
+
+                    <!-- Salud Emocional Card -->
+                    <div class="welcome-card glass-card border-emocional">
+                        <div class="welcome-card-header text-emocional">
+                            <i class="fa-solid fa-brain"></i>
+                            <h3>Salud Emocional</h3>
+                        </div>
+                        <p class="welcome-card-text">Descubre herramientas de mindfulness, técnicas de identificación de emociones y reseñas literarias y en video para comprender la inteligencia emocional en momentos de incertidumbre.</p>
+                        <button class="btn-welcome btn-emocional-welcome" onclick="switchSection('emocional')">
+                            <i class="fa-solid fa-heart"></i> Explorar Salud Emocional
+                        </button>
+                    </div>
+
+                    <!-- Salud Espiritual Card -->
+                    <div class="welcome-card glass-card border-espiritual">
+                        <div class="welcome-card-header text-espiritual">
+                            <i class="fa-solid fa-om"></i>
+                            <h3>Salud Espiritual</h3>
+                        </div>
+                        <p class="welcome-card-text">Encuentra paz interior, explora lecturas inspiradoras y accede a meditaciones guiadas y sonidos armónicos para nutrir tu crecimiento y evolución espiritual.</p>
+                        <button class="btn-welcome btn-espiritual-welcome" onclick="switchSection('espiritual')">
+                            <i class="fa-solid fa-spa"></i> Explorar Salud Espiritual
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 1: SALUD FINANCIERA -->
+            <div id="section-financiera" class="dashboard-grid" style="display: none;">
+            
+            <!-- Column Left: KPI Cards & Form -->
+            <section class="dashboard-left">
+                <!-- KPI Summary Cards -->
+                <div class="kpi-container">
+                    <div class="kpi-card balance-card">
+                        <div class="kpi-header">
+                            <span>Flujo de Efectivo Neto</span>
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div class="kpi-value" id="total-balance">$0.00</div>
+                        <div class="kpi-trend" id="balance-trend">
+                            <i class="fa-solid fa-circle-info"></i> Balance general disponible
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card income-card">
+                        <div class="kpi-header">
+                            <span>Total Ingresos</span>
+                            <i class="fa-solid fa-circle-arrow-up text-success"></i>
+                        </div>
+                        <div class="kpi-value text-success" id="total-income">$0.00</div>
+                        <div class="kpi-subtitle" id="income-count">0 transacciones</div>
+                    </div>
+
+                    <div class="kpi-card expense-card">
+                        <div class="kpi-header">
+                            <span>Total Egresos</span>
+                            <i class="fa-solid fa-circle-arrow-down text-danger"></i>
+                        </div>
+                        <div class="kpi-value text-danger" id="total-expense">$0.00</div>
+                        <div class="kpi-subtitle" id="expense-count">0 transacciones</div>
+                    </div>
+                </div>
+
+                <!-- Transaction Input Form Card -->
+                <div class="glass-card form-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-plus-minus"></i> Registrar Transacción</h2>
+                    </div>
+                    <form id="transaction-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="type">Tipo de Flujo</label>
+                                <select id="type" required onchange="updateCategories()">
+                                    <option value="ingreso" selected>Ingreso (+)</option>
+                                    <option value="egreso">Egreso (-)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Monto ($)</label>
+                                <input type="number" id="amount" step="0.01" min="0.01" placeholder="0.00" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <input type="text" id="description" placeholder="Ej. Sueldo, Supermercado, Alquiler..." required autocomplete="off">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="category">Categoría</label>
+                                <select id="category" required>
+                                    <!-- Dynamic options injected by JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Fecha</label>
+                                <input type="date" id="date" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="recurring" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="checkbox-label">Transacción Recurrente (Aplica a la vista de flujo continuo)</span>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Agregar al Flujo
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Column Right: Charts & Transaction History -->
+            <section class="dashboard-right">
+                <!-- Analytics Cards -->
+                <div class="glass-card charts-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-chart-pie"></i> Análisis de Flujo</h2>
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart-wrapper">
+                            <canvas id="bar-chart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="doughnut-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction List Card -->
+                <div class="glass-card list-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-list-check"></i> Historial de Movimientos</h2>
+                        <div class="filter-bar">
+                            <input type="text" id="search-input" placeholder="Buscar transacción..." oninput="filterTransactions()">
+                            <select id="category-filter" onchange="filterTransactions()">
+                                <option value="all">Todas las categorías</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="transaction-list-wrapper">
+                        <ul id="transaction-list" class="transaction-list">
+                            <!-- Injected dynamically by JS -->
+                            <li class="empty-list-msg">No hay transacciones registradas para este periodo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Educación Financiera y Videos -->
+            <section class="glass-card videos-card" style="grid-column: 1 / -1;">
+                <div class="card-header videos-header">
+                    <h2><i class="fa-solid fa-graduation-cap"></i> Educación Financiera & Recursos</h2>
+                    <div class="add-video-bar">
+                        <input type="text" id="video-url" placeholder="Pegar enlace de YouTube (https://...)">
+                        <input type="text" id="video-title" placeholder="Título personalizado (opcional)">
+                        <button onclick="addCustomVideo()" class="btn-add-video" title="Agregar video">
+                            <i class="fa-solid fa-plus"></i> Añadir
+                        </button>
+                    </div>
+                </div>
+                <div class="videos-grid" id="videos-grid">
+                    <!-- Dinámico por JS -->
+                </div>
+            </section>
+        </div> <!-- Fin SECCIÓN 1: Salud Financiera -->
+
+        <!-- SECCIÓN 2: SALUD EMOCIONAL -->
+        <div id="section-emocional" class="page-section" style="display: none;">
+            <div class="section-title-wrapper">
+                <h2><i class="fa-solid fa-brain text-brain"></i> Salud Emocional</h2>
+                <p>Explora recomendaciones de libros con reseñas escritas y reseñas en formato de video para cultivar tu bienestar mental y equilibrio emocional.</p>
+            </div>
+            
+            <div class="books-grid">
+                <!-- Libro 1 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper agreement-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">Los Cuatro Acuerdos</span>
+                            <span class="book-cover-author">Dr. Miguel Ruiz</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">Los Cuatro Acuerdos</h3>
+                        <p class="book-author">por Dr. Miguel Ruiz</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Una guía práctica para la libertad personal basada en la antigua sabiduría tolteca. El autor nos invita a romper con creencias limitantes que absorben nuestra energía y nos propone adoptar cuatro acuerdos sencillos pero sumamente poderosos: ser impecable con las palabras, no tomarse nada de manera personal, no hacer suposiciones y dar siempre el máximo esfuerzo en todo lo que hagamos. Una lectura transformadora indispensable para aliviar la carga mental cotidiana.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('qC8tQ4E-0zM')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Libro 2 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper intelligence-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">Inteligencia Emocional</span>
+                            <span class="book-cover-author">Daniel Goleman</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">Inteligencia Emocional</h3>
+                        <p class="book-author">por Daniel Goleman</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>La obra fundamental que redefinió el concepto de éxito y felicidad. Daniel Goleman demuestra cómo el coeficiente intelectual no es una métrica suficiente para predecir el triunfo en la vida personal y laboral, y cómo el autoconocimiento, la autorregulación emocional, la motivación, la empatía y las habilidades sociales son determinantes para nuestra salud mental y nuestras relaciones. Un libro esclarecedor cargado de base científica.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('f_X5pPjYm-M')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Libro 3 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper subtle-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">El sutil arte de que casi todo te importe una mi*rda</span>
+                            <span class="book-cover-author">Mark Manson</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">El sutil arte de que casi todo te importe una mi*rda</h3>
+                        <p class="book-author">por Mark Manson</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Un enfoque sumamente honesto y rompedor para el crecimiento personal. Manson desafía los clichés de la autoayuda convencional recordándonos que el sufrimiento y los problemas son parte natural de la vida. La verdadera paz mental y emocional no radica en evitar los problemas, sino en elegir con sabiduría qué es lo que realmente nos importa y dejar ir las batallas sin sentido. Divertido, provocador y liberador.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('v2kZzG5X_yU')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: SALUD ESPIRITUAL -->
+        <div id="section-espiritual" class="page-section" style="display: none;">
+            <div class="section-title-wrapper">
+                <h2><i class="fa-solid fa-om text-spiritual"></i> Salud Espiritual</h2>
+                <p>Encuentra paz interior, conéctate contigo mismo a través de lecturas seleccionadas y meditaciones guiadas de YouTube.</p>
+            </div>
+
+            <!-- Lecturas Recomendadas -->
+            <h3 class="subsection-title"><i class="fa-solid fa-book-open"></i> Lecturas Espirituales Recomendadas</h3>
+            <div class="books-grid">
+                <!-- Libro 1 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper power-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">El Poder del Ahora</span>
+                            <span class="book-cover-author">Eckhart Tolle</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">El Poder del Ahora</h3>
+                        <p class="book-author">por Eckhart Tolle</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Un manual indispensable para la iluminación espiritual y el despertar interior. Eckhart Tolle nos guía a través de un viaje profundo para comprender cómo el ego sabotea nuestra felicidad y cómo anclarnos en el momento presente (el "Ahora") extingue el sufrimiento mental. Una lectura profunda que transmite paz desde el primer capítulo y enseña a vivir sin ansiedad.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('u4hDlhQ4m9w')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Libro 2 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper siddhartha-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">Siddhartha</span>
+                            <span class="book-cover-author">Hermann Hesse</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">Siddhartha</h3>
+                        <p class="book-author">por Hermann Hesse</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Una novela lírica y poética ambientada en la India en tiempos de Buda. Cuenta el viaje espiritual de Siddhartha, un joven que busca la verdad última a través del ascetismo, las riquezas del comercio, los placeres amorosos y la contemplación de la naturaleza junto a un río. Hesse nos muestra de forma magistral cómo la verdadera sabiduría no se transmite por dogmas, sino mediante la experiencia personal de la vida.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('V4y7Y2jO-mU')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meditaciones -->
+            <div class="meditations-header-bar" style="margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <h3 class="subsection-title" style="margin: 0;"><i class="fa-solid fa-spa"></i> Meditaciones Guiadas y Sonidos de Relajación</h3>
+                <div class="add-meditation-bar">
+                    <input type="text" id="meditation-url" placeholder="Enlace de YouTube de la Comunidad...">
+                    <input type="text" id="meditation-title" placeholder="Título de meditación...">
+                    <button onclick="addCustomMeditation()" class="btn-add-meditation" title="Añadir meditación">
+                        <i class="fa-solid fa-plus"></i> Añadir
+                    </button>
+                </div>
+            </div>
+            <div class="meditations-grid" id="meditations-grid">
+                <!-- Injected dynamically by JS -->
+            </div>
+        </div>
+    </main>
+</div>
+
+    <!-- Modal Reproductor de Video -->
+    <div id="video-modal" class="modal" onclick="closeVideoModal(event)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeVideoModal(event)">&times;</button>
+            <div class="video-iframe-container">
+                <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script>
+/* ==========================================
+   Bienestar y Plenitud Integral - Application Logic
+   ========================================== */
+
+// Definición de Categorías por Tipo
+const categories = {
+    ingreso: [
+        { value: 'sueldo', label: 'Sueldo / Salario', icon: 'fa-money-bill-wave' },
+        { value: 'inversion', label: 'Inversiones', icon: 'fa-chart-line' },
+        { value: 'negocio', label: 'Negocio Propio', icon: 'fa-briefcase' },
+        { value: 'otros-ingresos', label: 'Otros Ingresos', icon: 'fa-hand-holding-dollar' }
+    ],
+    egreso: [
+        { value: 'vivienda', label: 'Alquiler / Vivienda', icon: 'fa-house' },
+        { value: 'alimentacion', label: 'Alimentación', icon: 'fa-utensils' },
+        { value: 'transporte', label: 'Transporte', icon: 'fa-car' },
+        { value: 'servicios', label: 'Servicios Básicos', icon: 'fa-bolt' },
+        { value: 'ocio', label: 'Ocio y Diversión', icon: 'fa-gamepad' },
+        { value: 'salud', label: 'Salud', icon: 'fa-heart-pulse' },
+        { value: 'educacion', label: 'Educación', icon: 'fa-graduation-cap' },
+        { value: 'otros-egresos', label: 'Otros Egresos', icon: 'fa-ellipsis' }
+    ]
+};
+
+// Estado Global
+let state = {
+    timeframe: 'semanal', // 'semanal' o 'mensual'
+    transactions: [],
+    videos: [],
+    meditations: [],
+    searchQuery: '',
+    categoryFilter: 'all'
+};
+
+// Referencias a los Gráficos de Chart.js
+let barChartInstance = null;
+let doughnutChartInstance = null;
+
+// Helper para formatear fechas relativas para los Mock Data
+const getRelativeDate = (daysAgo) => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    return date.toISOString().split('T')[0];
+};
+
+// Datos Iniciales (Mock Data) para mejorar la primera impresión
+const defaultTransactions = [
+    { id: 't1', type: 'ingreso', amount: 1200.00, description: 'Sueldo Quincenal', category: 'sueldo', date: getRelativeDate(3), recurring: true },
+    { id: 't2', type: 'egreso', amount: 450.00, description: 'Alquiler Departamento', category: 'vivienda', date: getRelativeDate(5), recurring: true },
+    { id: 't3', type: 'egreso', amount: 95.00, description: 'Compra de Supermercado', category: 'alimentacion', date: getRelativeDate(1), recurring: false },
+    { id: 't4', type: 'egreso', amount: 25.00, description: 'Suscripciones (Netflix/Spotify)', category: 'servicios', date: getRelativeDate(4), recurring: true },
+    { id: 't5', type: 'ingreso', amount: 150.00, description: 'Freelance Diseño Web', category: 'negocio', date: getRelativeDate(2), recurring: false },
+    { id: 't6', type: 'egreso', amount: 45.00, description: 'Carga de Combustible', category: 'transporte', date: getRelativeDate(0), recurring: false },
+    { id: 't7', type: 'egreso', amount: 60.00, description: 'Cena de Fin de Semana', category: 'ocio', date: getRelativeDate(2), recurring: false }
+];
+
+// Videos por defecto sobre Educación Financiera
+const defaultVideos = [
+    { id: 'v1', youtubeId: '3-M2J2t_GQA', title: 'Finanzas Personales para Principiantes', desc: 'Aprende los conceptos básicos para organizar tu dinero desde cero, presupuestos y control.' },
+    { id: 'v2', youtubeId: '9gKqG1tF1tA', title: 'Entendiendo el Flujo de Caja', desc: 'Cómo funciona el flujo de efectivo y por qué es clave para la salud financiera de tu hogar.' },
+    { id: 'v3', youtubeId: '_f8iMvT7Tjo', title: 'La Regla del 50/30/20', desc: 'Un método sencillo y estructurado para dividir tus ingresos mensuales en necesidades, deseos y ahorro.' },
+    { id: 'v4', youtubeId: 'v5gHj5t2k0E', title: 'Estrategias Prácticas de Ahorro', desc: 'Aprende métodos realistas para reducir gastos superfluos y armar tu fondo de emergencia.' },
+    { id: 'v5', youtubeId: 'BELLIAkMGZk', title: 'Cómo Multiplicar tus Ingresos', desc: 'Consejos clave sobre mentalidad, inversiones básicas y diversificación del flujo de dinero.' }
+];
+
+// Inicialización de la Aplicación
+document.addEventListener('DOMContentLoaded', () => {
+    // Establecer fecha por defecto en el formulario (hoy)
+    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+
+    // Cargar datos
+    loadTransactions();
+    loadVideos();
+    loadMeditations();
+    
+    // Inyectar categorías iniciales en el formulario
+    updateCategories();
+    
+    // Inyectar categorías en el filtro de búsqueda
+    populateFilterCategories();
+
+    // Renderizar Dashboard y Videos
+    updateDashboard();
+    renderVideos();
+    renderMeditations();
+});
+
+// Cargar transacciones de localStorage o asignar iniciales
+function loadTransactions() {
+    const saved = localStorage.getItem('cashflow_transactions');
+    if (saved) {
+        state.transactions = JSON.parse(saved);
+    } else {
+        state.transactions = defaultTransactions;
+        saveTransactions();
+    }
+}
+
+// Guardar transacciones en localStorage
+function saveTransactions() {
+    localStorage.setItem('cashflow_transactions', JSON.stringify(state.transactions));
+}
+
+// Actualiza las categorías del Formulario según el tipo seleccionado (Ingreso/Egreso)
+function updateCategories() {
+    const type = document.getElementById('type').value;
+    const categorySelect = document.getElementById('category');
+    
+    categorySelect.innerHTML = '';
+    categories[type].forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.value;
+        option.textContent = cat.label;
+        categorySelect.appendChild(option);
+    });
+}
+
+// Inyecta dinámicamente las categorías en el dropdown de filtros del historial
+function populateFilterCategories() {
+    const filterSelect = document.getElementById('category-filter');
+    filterSelect.innerHTML = '<option value="all">Todas las categorías</option>';
+    
+    // Unir ambas listas de categorías
+    const allCats = [...categories.ingreso, ...categories.egreso];
+    // Evitar duplicados por valor
+    const uniqueCats = Array.from(new Map(allCats.map(item => [item.value, item])).values());
+    
+    uniqueCats.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.value;
+        option.textContent = cat.label;
+        filterSelect.appendChild(option);
+    });
+}
+
+// Alternar entre pestaña semanal y mensual
+function changeTimeframe(timeframe) {
+    state.timeframe = timeframe;
+    
+    // Actualizar clases activas en UI
+    document.getElementById('btn-semanal').classList.toggle('active', timeframe === 'semanal');
+    document.getElementById('btn-mensual').classList.toggle('active', timeframe === 'mensual');
+    
+    updateDashboard();
+}
+
+// Comprueba si una fecha pertenece a la semana en curso (Lunes - Domingo)
+function isCurrentWeek(dateStr) {
+    const transactionDate = new Date(dateStr + 'T00:00:00');
+    const today = new Date();
+    
+    // Lunes actual
+    const currentDay = today.getDay();
+    const distanceToMonday = currentDay === 0 ? 6 : currentDay - 1; // Ajuste si hoy es Domingo (0)
+    
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - distanceToMonday);
+    startOfWeek.setHours(0, 0, 0, 0);
+    
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+    
+    return transactionDate >= startOfWeek && transactionDate <= endOfWeek;
+}
+
+// Comprueba si una fecha pertenece al mes en curso
+function isCurrentMonth(dateStr) {
+    const transactionDate = new Date(dateStr + 'T00:00:00');
+    const today = new Date();
+    return transactionDate.getMonth() === today.getMonth() && 
+           transactionDate.getFullYear() === today.getFullYear();
+}
+
+// Obtener transacciones filtradas por periodo y criterios de búsqueda
+function getFilteredTransactions() {
+    return state.transactions.filter(t => {
+        // 1. Filtrar por Periodo (Semanal vs Mensual)
+        let inPeriod = false;
+        if (state.timeframe === 'semanal') {
+            inPeriod = isCurrentWeek(t.date);
+        } else {
+            inPeriod = isCurrentMonth(t.date);
+        }
+        
+        // Si no está en el periodo seleccionado, descartar
+        if (!inPeriod) return false;
+
+        // 2. Filtrar por barra de búsqueda
+        const matchesSearch = t.description.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                              t.amount.toString().includes(state.searchQuery);
+        
+        // 3. Filtrar por categoría
+        const matchesCategory = state.categoryFilter === 'all' || t.category === state.categoryFilter;
+
+        return matchesSearch && matchesCategory;
+    });
+}
+
+// Actualizar todo el Dashboard (KPIs, Listas y Gráficos)
+function updateDashboard() {
+    const filtered = getFilteredTransactions();
+    
+    // Ordenar transacciones por fecha descendente
+    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Calcular totales
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let incomeCount = 0;
+    let expenseCount = 0;
+
+    filtered.forEach(t => {
+        if (t.type === 'ingreso') {
+            totalIncome += t.amount;
+            incomeCount++;
+        } else {
+            totalExpense += t.amount;
+            expenseCount++;
+        }
+    });
+
+    const netFlow = totalIncome - totalExpense;
+
+    // Actualizar textos e importes en pantalla
+    document.getElementById('total-income').textContent = formatCurrency(totalIncome);
+    document.getElementById('income-count').textContent = `${incomeCount} transacción${incomeCount !== 1 ? 'es' : ''}`;
+    
+    document.getElementById('total-expense').textContent = formatCurrency(totalExpense);
+    document.getElementById('expense-count').textContent = `${expenseCount} transacción${expenseCount !== 1 ? 'es' : ''}`;
+    
+    const balanceEl = document.getElementById('total-balance');
+    balanceEl.textContent = formatCurrency(netFlow);
+    
+    // Cambiar clases del saldo neto según sea positivo o negativo
+    balanceEl.className = 'kpi-value ' + (netFlow >= 0 ? 'text-success' : 'text-danger');
+    
+    // Actualizar indicador de tendencia de flujo
+    const trendEl = document.getElementById('balance-trend');
+    if (netFlow > 0) {
+        trendEl.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-success"></i> Superávit en el periodo`;
+    } else if (netFlow < 0) {
+        trendEl.innerHTML = `<i class="fa-solid fa-arrow-trend-down text-danger"></i> Déficit en el periodo`;
+    } else {
+        trendEl.innerHTML = `<i class="fa-solid fa-circle-info"></i> Flujo de efectivo neutro`;
+    }
+
+    // Renderizar lista en el historial
+    renderList(filtered);
+
+    // Actualizar gráficos analíticos
+    renderCharts(filtered, totalIncome, totalExpense);
+}
+
+// Formateador de Moneda
+function formatCurrency(value) {
+    return new Intl.NumberFormat('es-US', {
+        style: 'currency',
+        currency: 'USD'
+    }).format(value);
+}
+
+// Formateador de Fecha legible
+function formatDateReadable(dateStr) {
+    const options = { day: '2-digit', month: 'short' };
+    // Ajustar para evitar problemas de zona horaria local al instanciar
+    const date = new Date(dateStr + 'T00:00:00');
+    return date.toLocaleDateString('es-ES', options);
+}
+
+// Buscar icono y datos de la categoría
+function getCategoryMeta(catValue) {
+    const allCats = [...categories.ingreso, ...categories.egreso];
+    const cat = allCats.find(c => c.value === catValue);
+    return cat || { label: 'Otro', icon: 'fa-ellipsis' };
+}
+
+// Renderizar la lista de transacciones en la interfaz
+function renderList(transactions) {
+    const listContainer = document.getElementById('transaction-list');
+    listContainer.innerHTML = '';
+
+    if (transactions.length === 0) {
+        listContainer.innerHTML = '<li class="empty-list-msg">No se encontraron movimientos para los filtros seleccionados.</li>';
+        return;
+    }
+
+    transactions.forEach(t => {
+        const meta = getCategoryMeta(t.category);
+        const li = document.createElement('li');
+        li.className = 'transaction-item';
+        
+        li.innerHTML = `
+            <div class="item-left">
+                <div class="item-icon ${t.type}">
+                    <i class="fa-solid ${meta.icon}"></i>
+                </div>
+                <div class="item-details">
+                    <span class="item-title">${t.description}</span>
+                    <div class="item-meta">
+                        <span>${meta.label}</span>
+                        <span>${formatDateReadable(t.date)}</span>
+                        ${t.recurring ? '<span class="text-success"><i class="fa-solid fa-rotate"></i> Fijo</span>' : ''}
+                    </div>
+                </div>
+            </div>
+            <div class="item-right">
+                <span class="item-amount ${t.type}">
+                    ${t.type === 'ingreso' ? '+' : '-'}${formatCurrency(t.amount)}
+                </span>
+                <button class="btn-delete" onclick="deleteTransaction('${t.id}')" title="Eliminar del flujo">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        `;
+        
+        listContainer.appendChild(li);
+    });
+}
+
+// Agregar nueva transacción desde el formulario
+function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    const type = document.getElementById('type').value;
+    const amount = parseFloat(document.getElementById('amount').value);
+    const description = document.getElementById('description').value.trim();
+    const category = document.getElementById('category').value;
+    const date = document.getElementById('date').value;
+    const recurring = document.getElementById('recurring').checked;
+
+    if (!description || isNaN(amount) || amount <= 0) return;
+
+    const newTransaction = {
+        id: 'trans-' + Date.now(),
+        type,
+        amount,
+        description,
+        category,
+        date,
+        recurring
+    };
+
+    state.transactions.push(newTransaction);
+    saveTransactions();
+    
+    // Limpiar formulario excepto fecha
+    document.getElementById('amount').value = '';
+    document.getElementById('description').value = '';
+    
+    // Actualizar dashboard
+    updateDashboard();
+}
+
+// Eliminar transacción por ID
+function deleteTransaction(id) {
+    state.transactions = state.transactions.filter(t => t.id !== id);
+    saveTransactions();
+    updateDashboard();
+}
+
+// Filtrar transacciones en base a entradas
+function filterTransactions() {
+    state.searchQuery = document.getElementById('search-input').value;
+    state.categoryFilter = document.getElementById('category-filter').value;
+    updateDashboard();
+}
+
+// Inicializar y Renderizar Gráficos con Chart.js
+function renderCharts(transactions, totalIncome, totalExpense) {
+    // Destruir gráficos anteriores para evitar problemas de re-renderizado al pasar el mouse
+    if (barChartInstance) barChartInstance.destroy();
+    if (doughnutChartInstance) doughnutChartInstance.destroy();
+
+    // 1. Gráfico Comparativo de Barras: Ingresos vs Egresos
+    const ctxBar = document.getElementById('bar-chart').getContext('2d');
+    barChartInstance = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['Ingresos', 'Egresos'],
+            datasets: [{
+                data: [totalIncome, totalExpense],
+                backgroundColor: [
+                    'rgba(20, 184, 166, 0.8)', // Verde Aqua
+                    'rgba(249, 115, 22, 0.8)'   // Naranja
+                ],
+                borderColor: [
+                    '#14b8a6', // Verde Aqua
+                    '#f97316'  // Naranja
+                ],
+                borderWidth: 1.5,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ' ' + formatCurrency(context.parsed.y);
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { color: '#475569', font: { family: 'Inter', size: 11, weight: '500' } }
+                },
+                y: {
+                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                    ticks: { color: '#475569', font: { family: 'Inter', size: 10 } }
+                }
+            }
+        }
+    });
+
+    // 2. Gráfico de Dona: Distribución de Gastos (Egresos) por Categoría
+    const expenses = transactions.filter(t => t.type === 'egreso');
+    const categoryTotals = {};
+    
+    expenses.forEach(e => {
+        const meta = getCategoryMeta(e.category);
+        categoryTotals[meta.label] = (categoryTotals[meta.label] || 0) + e.amount;
+    });
+
+    const labels = Object.keys(categoryTotals);
+    const data = Object.values(categoryTotals);
+
+    // Paleta de colores degradados en naranja para los gastos (egresos)
+    const colorPalette = [
+        'rgba(249, 115, 22, 0.85)', // Naranja principal
+        'rgba(251, 146, 60, 0.85)', // Naranja intermedio claro
+        'rgba(234, 88, 12, 0.85)',  // Naranja oscuro
+        'rgba(253, 186, 116, 0.85)',// Naranja muy claro
+        'rgba(254, 215, 170, 0.85)',// Naranja pastel suave
+        'rgba(194, 65, 12, 0.85)'   // Naranja tierra profundo
+    ];
+
+    const ctxDoughnut = document.getElementById('doughnut-chart').getContext('2d');
+    
+    if (labels.length === 0) {
+        // Si no hay gastos, mostrar un estado vacío en el gráfico de dona
+        doughnutChartInstance = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: ['Sin gastos registrados'],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: ['rgba(0, 0, 0, 0.04)'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            }
+        });
+    } else {
+        doughnutChartInstance = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: colorPalette.slice(0, labels.length),
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ' ' + context.label + ': ' + formatCurrency(context.parsed);
+                            }
+                        }
+                    }
+                },
+                cutout: '65%'
+            }
+        });
+    }
+}
+
+// ==========================================
+// Videos Education / YouTube Management
+// ==========================================
+
+// Cargar videos de localStorage
+function loadVideos() {
+    const saved = localStorage.getItem('cashflow_videos');
+    if (saved) {
+        state.videos = JSON.parse(saved);
+        
+        // Asegurar que los nuevos videos solicitados estén presentes
+        const newIds = ['v5gHj5t2k0E', 'BELLIAkMGZk'];
+        let updated = false;
+        
+        newIds.forEach(id => {
+            const exists = state.videos.some(v => v.youtubeId === id);
+            if (!exists) {
+                // Encontrar el video correspondiente en defaultVideos
+                const videoData = defaultVideos.find(v => v.youtubeId === id);
+                if (videoData) {
+                    state.videos.push(videoData);
+                    updated = true;
+                }
+            }
+        });
+        
+        if (updated) {
+            saveVideos();
+        }
+    } else {
+        state.videos = defaultVideos;
+        saveVideos();
+    }
+}
+
+// Guardar videos en localStorage
+function saveVideos() {
+    localStorage.setItem('cashflow_videos', JSON.stringify(state.videos));
+}
+
+// Extraer ID de YouTube desde un link
+function getYouTubeId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+// Renderizar la rejilla de videos
+function renderVideos() {
+    const grid = document.getElementById('videos-grid');
+    grid.innerHTML = '';
+
+    if (state.videos.length === 0) {
+        grid.innerHTML = '<p class="empty-list-msg" style="grid-column: 1/-1;">No tienes videos agregados. ¡Pega un enlace de YouTube arriba para añadir uno!</p>';
+        return;
+    }
+
+    state.videos.forEach(v => {
+        const card = document.createElement('div');
+        card.className = 'video-card-item';
+        
+        // Obtener url de miniatura (mqdefault para mejor velocidad)
+        const thumbnailUrl = `https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`;
+        
+        card.innerHTML = `
+            <div class="video-thumbnail-container" onclick="playVideo('${v.youtubeId}')">
+                <img src="${thumbnailUrl}" alt="${v.title}" class="video-thumbnail">
+                <div class="play-overlay">
+                    <i class="fa-solid fa-circle-play"></i>
+                </div>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title">${v.title}</h3>
+                <p class="video-desc">${v.desc || 'Video sobre finanzas y flujo de efectivo.'}</p>
+                <div class="video-footer">
+                    <button class="btn-watch" onclick="playVideo('${v.youtubeId}')">
+                        <i class="fa-solid fa-play"></i> Ver ahora
+                    </button>
+                    <button class="btn-delete-video" onclick="deleteVideo('${v.id}')" title="Eliminar video">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Agregar video personalizado
+function addCustomVideo() {
+    const urlInput = document.getElementById('video-url');
+    const titleInput = document.getElementById('video-title');
+    
+    const url = urlInput.value.trim();
+    let title = titleInput.value.trim();
+    
+    if (!url) {
+        alert('Por favor, ingresa un enlace de YouTube válido.');
+        return;
+    }
+    
+    const youtubeId = getYouTubeId(url);
+    if (!youtubeId) {
+        alert('No se pudo reconocer el ID del video de YouTube. Verifica el formato del enlace.');
+        return;
+    }
+
+    if (!title) {
+        title = 'Video de Finanzas Personalizado';
+    }
+
+    const newVideo = {
+        id: 'vid-' + Date.now(),
+        youtubeId,
+        title,
+        desc: 'Video agregado por el usuario desde enlace de YouTube.'
+    };
+
+    state.videos.push(newVideo);
+    saveVideos();
+    renderVideos();
+
+    // Limpiar inputs
+    urlInput.value = '';
+    titleInput.value = '';
+}
+
+// Eliminar video
+function deleteVideo(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar este video de tu lista de recursos?')) {
+        state.videos = state.videos.filter(v => v.id !== id);
+        saveVideos();
+        renderVideos();
+    }
+}
+
+// Reproducir video (abrir modal)
+function playVideo(youtubeId) {
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('video-iframe');
+    
+    iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
+    modal.classList.add('active');
+}
+
+// Cerrar modal
+function closeVideoModal(e) {
+    // Si viene de un evento click, asegurarse de que no se hace click dentro de la tarjeta
+    if (e && e.target && e.target.closest('.modal-content') && !e.target.classList.contains('close-modal')) {
+        return;
+    }
+    
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('video-iframe');
+    
+    iframe.src = '';
+    modal.classList.remove('active');
+}
+
+// ==========================================
+// Meditaciones / YouTube Management (Salud Espiritual)
+// ==========================================
+
+const defaultMeditations = [
+    {
+        id: 'med-1',
+        youtubeId: '18Wf8N5yK3o',
+        title: 'Meditación Guiada para la Calma Mental',
+        desc: 'Ideal para relajarse en momentos de estrés, reducir la ansiedad y reconectar con la respiración.'
+    },
+    {
+        id: 'med-2',
+        youtubeId: '3_G4E7vK-gY',
+        title: 'Armonización de Cuencos Tibetanos',
+        desc: 'Frecuencias de sanación y cuencos tibetanos ideales para meditar en silencio o conciliar el sueño.'
+    },
+    {
+        id: 'med-3',
+        youtubeId: 'zP_65t89K-c',
+        title: 'Meditación Zen de Atención Plena',
+        desc: 'Práctica sencilla de mindfulness basada en contar respiraciones y aquietar los pensamientos.'
+    },
+    {
+        id: 'med-4',
+        youtubeId: 'v5gHj5t2k0E',
+        title: 'Meditación Guiada para la Salud',
+        desc: 'Enfocada en revitalizar tu energía física, restaurar el bienestar corporal y reconectar con la salud integral.'
+    },
+    {
+        id: 'med-5',
+        youtubeId: 'SDuHjz_oxP4',
+        title: 'Meditación de Gratitud y Agradecimiento',
+        desc: 'Conéctate con la abundancia y el aprecio sincero por la vida, calmando la mente y abriendo el corazón.'
+    },
+    {
+        id: 'med-6',
+        youtubeId: 'MIU_JOeU9gs',
+        title: 'Sanación a través de Sonidos',
+        desc: 'Frecuencias armónicas y sonidos de sanación diseñados para relajar profundamente y equilibrar la mente.'
+    }
+];
+
+// Cargar meditaciones de localStorage
+function loadMeditations() {
+    const saved = localStorage.getItem('chi_meditations');
+    if (saved) {
+        state.meditations = JSON.parse(saved);
+        
+        // Asegurar que los nuevos videos solicitados estén presentes
+        const newIds = ['v5gHj5t2k0E', 'SDuHjz_oxP4', 'MIU_JOeU9gs'];
+        let updated = false;
+        
+        newIds.forEach(id => {
+            const exists = state.meditations.some(m => m.youtubeId === id);
+            if (!exists) {
+                const medData = defaultMeditations.find(m => m.youtubeId === id);
+                if (medData) {
+                    state.meditations.push(medData);
+                    updated = true;
+                }
+            }
+        });
+        
+        if (updated) {
+            saveMeditations();
+        }
+    } else {
+        state.meditations = defaultMeditations;
+        saveMeditations();
+    }
+}
+
+// Guardar meditaciones en localStorage
+function saveMeditations() {
+    localStorage.setItem('chi_meditations', JSON.stringify(state.meditations));
+}
+
+// Cargar comentarios de localStorage
+function getComments(youtubeId) {
+    const saved = localStorage.getItem(`comments_${youtubeId}`);
+    return saved ? JSON.parse(saved) : [];
+}
+
+// Guardar comentario en localStorage
+function saveComment(youtubeId, commentText) {
+    const comments = getComments(youtubeId);
+    const newComment = {
+        id: 'comm-' + Date.now(),
+        text: commentText,
+        date: new Date().toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+    };
+    comments.push(newComment);
+    localStorage.setItem(`comments_${youtubeId}`, JSON.stringify(comments));
+    return newComment;
+}
+
+// Añadir comentario desde el formulario
+function handleCommentSubmit(e, youtubeId) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const form = e.target;
+    const input = form.querySelector('.comment-input');
+    const text = input.value.trim();
+    
+    if (!text) return;
+    
+    saveComment(youtubeId, text);
+    input.value = '';
+    
+    // Volver a renderizar la lista de comentarios para esta meditación
+    renderCommentsList(youtubeId);
+    
+    // Actualizar también el contador en el botón de toggle
+    const toggleSpan = form.closest('.meditation-info').querySelector('.meditation-comments-toggle span');
+    if (toggleSpan) {
+        toggleSpan.textContent = `Ver Experiencias (${getComments(youtubeId).length})`;
+    }
+}
+
+// Renderizar la lista de comentarios de una meditación
+function renderCommentsList(youtubeId) {
+    const commentsContainer = document.getElementById(`comments-list-${youtubeId}`);
+    if (!commentsContainer) return;
+    
+    const comments = getComments(youtubeId);
+    
+    if (comments.length === 0) {
+        commentsContainer.innerHTML = '<li class="no-comments-msg">No hay experiencias compartidas aún. ¡Escribe la tuya abajo!</li>';
+        return;
+    }
+    
+    commentsContainer.innerHTML = comments.map(c => `
+        <li class="comment-item">
+            <span class="comment-text">${escapeHtml(c.text)}</span>
+            <span class="comment-meta"><i class="fa-solid fa-sparkles text-spiritual"></i> ${c.date}</span>
+        </li>
+    `).join('');
+    
+    // Hacer scroll al final de la lista
+    commentsContainer.scrollTop = commentsContainer.scrollHeight;
+}
+
+// Helper para escapar HTML y evitar inyecciones XSS
+function escapeHtml(text) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+// Alternar panel de comentarios
+function toggleComments(e, youtubeId) {
+    e.stopPropagation();
+    
+    const panel = document.getElementById(`comments-panel-${youtubeId}`);
+    const toggleBtn = e.currentTarget;
+    const isExpanded = panel.classList.toggle('active');
+    
+    if (isExpanded) {
+        renderCommentsList(youtubeId);
+        toggleBtn.innerHTML = `<span>Ocultar Experiencias (${getComments(youtubeId).length})</span> <i class="fa-solid fa-chevron-up"></i>`;
+    } else {
+        toggleBtn.innerHTML = `<span>Ver Experiencias (${getComments(youtubeId).length})</span> <i class="fa-solid fa-chevron-down"></i>`;
+    }
+}
+
+// Agregar meditación personalizada (del canal de CHI)
+function addCustomMeditation() {
+    const urlInput = document.getElementById('meditation-url');
+    const titleInput = document.getElementById('meditation-title');
+    
+    const url = urlInput.value.trim();
+    let title = titleInput.value.trim();
+    
+    if (!url) {
+        alert('Por favor, ingresa un enlace de YouTube válido.');
+        return;
+    }
+    
+    const youtubeId = getYouTubeId(url);
+    if (!youtubeId) {
+        alert('No se pudo reconocer el ID del video de YouTube. Verifica el formato del enlace.');
+        return;
+    }
+    
+    if (!title) {
+        title = 'Meditación Guiada Comunidad';
+    }
+    
+    const newMeditation = {
+        id: 'med-' + Date.now(),
+        youtubeId,
+        title,
+        desc: 'Meditación agregada por el usuario desde canal de la comunidad de YouTube.'
+    };
+    
+    state.meditations.push(newMeditation);
+    saveMeditations();
+    renderMeditations();
+    
+    // Limpiar inputs
+    urlInput.value = '';
+    titleInput.value = '';
+}
+
+// Eliminar meditación personalizada
+function deleteMeditation(e, id) {
+    e.stopPropagation();
+    if (confirm('¿Estás seguro de que deseas eliminar esta meditación?')) {
+        state.meditations = state.meditations.filter(m => m.id !== id);
+        saveMeditations();
+        renderMeditations();
+    }
+}
+
+// Renderizar la rejilla de meditaciones
+function renderMeditations() {
+    const grid = document.getElementById('meditations-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    
+    if (!state.meditations || state.meditations.length === 0) {
+        grid.innerHTML = '<p class="empty-list-msg" style="grid-column: 1/-1;">No hay meditaciones registradas.</p>';
+        return;
+    }
+    
+    state.meditations.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'meditation-card glass-card';
+        card.setAttribute('onclick', `playVideo('${m.youtubeId}')`);
+        
+        const commentsCount = getComments(m.youtubeId).length;
+        const thumbnailUrl = `https://img.youtube.com/vi/${m.youtubeId}/mqdefault.jpg`;
+        
+        card.innerHTML = `
+            <div class="meditation-thumbnail-wrapper">
+                <img src="${thumbnailUrl}" alt="${m.title}" class="meditation-thumbnail">
+                <div class="meditation-play-overlay">
+                    <i class="fa-solid fa-circle-play"></i>
+                </div>
+            </div>
+            <div class="meditation-info">
+                <h4 class="meditation-title">${m.title}</h4>
+                <p class="meditation-desc">${m.desc || 'Meditación guiada para tu bienestar integral.'}</p>
+                
+                <!-- Toggle de Comentarios / Experiencias -->
+                <div class="meditation-comments-toggle" onclick="toggleComments(event, '${m.youtubeId}')">
+                    <span>Ver Experiencias (${commentsCount})</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                
+                <!-- Panel de Comentarios -->
+                <div class="meditation-comments-panel" id="comments-panel-${m.youtubeId}" onclick="event.stopPropagation()">
+                    <ul class="comments-list" id="comments-list-${m.youtubeId}">
+                        <!-- Inyectados por JS -->
+                    </ul>
+                    <form class="comment-form" onsubmit="handleCommentSubmit(event, '${m.youtubeId}')">
+                        <input type="text" class="comment-input" placeholder="Comparte tu experiencia..." required autocomplete="off">
+                        <button type="submit" class="btn-submit-comment" title="Compartir">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        `;
+        
+        // Agregar botón de borrar para meditaciones personalizadas
+        if (m.id.startsWith('med-') && !defaultMeditations.some(dm => dm.id === m.id)) {
+            const footer = document.createElement('div');
+            footer.style.padding = '0 1rem 1rem 1rem';
+            footer.style.display = 'flex';
+            footer.style.justifyContent = 'flex-end';
+            footer.style.marginTop = '-0.5rem';
+            footer.innerHTML = `
+                <button class="btn-delete-video" onclick="deleteMeditation(event, '${m.id}')" title="Eliminar meditación" style="background: transparent; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 0.8rem; transition: var(--transition-fast);">
+                    <i class="fa-solid fa-trash-can"></i> Eliminar
+                </button>
+            `;
+            footer.querySelector('button').addEventListener('mouseenter', function() { this.style.color = '#ef4444'; });
+            footer.querySelector('button').addEventListener('mouseleave', function() { this.style.color = 'var(--color-text-muted)'; });
+            card.appendChild(footer);
+        }
+        
+        grid.appendChild(card);
+    });
+}
+
+// ==========================================
+// Secciones de Salud - Navigation & Anim
+// ==========================================
+
+function switchSection(sectionName) {
+    // Ocultar todas las secciones
+    document.getElementById('section-inicio').style.display = 'none';
+    document.getElementById('section-financiera').style.display = 'none';
+    document.getElementById('section-emocional').style.display = 'none';
+    document.getElementById('section-espiritual').style.display = 'none';
+
+    // Desactivar todos los botones de la barra nav
+    document.getElementById('btn-inicio').classList.remove('active');
+    document.getElementById('btn-financiera').classList.remove('active');
+    document.getElementById('btn-emocional').classList.remove('active');
+    document.getElementById('btn-espiritual').classList.remove('active');
+
+    // Activar sección y botón seleccionado
+    if (sectionName === 'inicio') {
+        document.getElementById('section-inicio').style.display = 'flex';
+        document.getElementById('btn-inicio').classList.add('active');
+        triggerInicioAnimation();
+    } else if (sectionName === 'financiera') {
+        document.getElementById('section-financiera').style.display = 'grid';
+        document.getElementById('btn-financiera').classList.add('active');
+        triggerFinancieraAnimation();
+        // Actualizar gráficos por si acaso
+        setTimeout(() => {
+            updateDashboard();
+        }, 100);
+    } else if (sectionName === 'emocional') {
+        document.getElementById('section-emocional').style.display = 'block';
+        document.getElementById('btn-emocional').classList.add('active');
+        triggerEmocionalAnimation();
+    } else if (sectionName === 'espiritual') {
+        document.getElementById('section-espiritual').style.display = 'block';
+        document.getElementById('btn-espiritual').classList.add('active');
+        triggerEspiritualAnimation();
+        // Renderizar meditaciones actualizadas al cambiar de sección
+        setTimeout(() => {
+            renderMeditations();
+        }, 100);
+    }
+}
+
+// Animación 0: Inicio (Partículas de destellos de luz)
+function triggerInicioAnimation() {
+    const btn = document.getElementById('btn-inicio');
+    
+    // Brillo de contorno (dura 10s)
+    btn.classList.add('glow-inicio');
+    setTimeout(() => btn.classList.remove('glow-inicio'), 10000);
+
+    // Lanzar destellos y estrellas
+    const particles = ['✨', '⭐', '💫', '✨', '⭐', '💫'];
+    spawnParticles(btn, particles);
+}
+
+// Animación 1: Salud Financiera (Monedas, billetes, destellos)
+function triggerFinancieraAnimation() {
+    const btn = document.getElementById('btn-financiera');
+    
+    // Brillo de contorno (dura 10s)
+    btn.classList.add('glow-financiera');
+    setTimeout(() => btn.classList.remove('glow-financiera'), 10000);
+
+    // Lanzar partículas
+    const particles = ['💵', '🪙', '✨', '💵', '🪙', '✨', '💵', '🪙', '✨'];
+    spawnParticles(btn, particles);
+}
+
+// Animación 2: Salud Emocional (Cerebro brillante, corazón rojo, carita triste a feliz)
+function triggerEmocionalAnimation() {
+    const btn = document.getElementById('btn-emocional');
+    
+    // Brillo de contorno (dura 10s)
+    btn.classList.add('glow-emocional');
+    setTimeout(() => btn.classList.remove('glow-emocional'), 10000);
+
+    // Lanzar cerebros y corazones con brillo
+    const particles = ['🧠', '❤️', '✨', '🧠', '❤️', '✨'];
+    spawnParticles(btn, particles);
+
+    // Lanzar carita de triste a feliz
+    spawnChangingFace(btn);
+}
+
+// Animación 3: Salud Espiritual (Monje tibetano caminando y meditando)
+function triggerEspiritualAnimation() {
+    const btn = document.getElementById('btn-espiritual');
+    
+    // Brillo de contorno (dura 10s)
+    btn.classList.add('glow-espiritual');
+    setTimeout(() => btn.classList.remove('glow-espiritual'), 10000);
+
+    // Lanzar el monje animado
+    spawnMonk(btn);
+}
+
+// Generador de partículas de dispersión genérico (Velocidad a la mitad, duración 10s)
+function spawnParticles(btn, list) {
+    const rect = btn.getBoundingClientRect();
+    
+    list.forEach((char, i) => {
+        const particle = document.createElement('div');
+        particle.className = 'sparkle-particle';
+        particle.textContent = char;
+        
+        // Calcular dirección de dispersión radial
+        const angle = (Math.PI * 2 / list.length) * i + (Math.random() - 0.5) * 0.4;
+        const velocity = 1.75 + Math.random() * 2; // Velocidad a la mitad
+        const xVel = Math.cos(angle) * velocity;
+        const yVel = Math.sin(angle) * velocity - 1.25; // Desplazamiento vertical a la mitad
+        
+        // Posicionar en el centro del botón
+        particle.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
+        particle.style.top = `${rect.top + rect.height / 2 + window.scrollY}px`;
+        
+        document.body.appendChild(particle);
+        
+        let posX = rect.left + rect.width / 2;
+        let posY = rect.top + rect.height / 2;
+        let opacity = 1;
+        let scale = 0.8;
+        
+        const anim = setInterval(() => {
+            posX += xVel;
+            posY += yVel;
+            opacity -= 0.003; // Reducción de opacidad lenta para durar 10s
+            scale += 0.001;  // Expansión más lenta
+            
+            particle.style.left = `${posX + window.scrollX}px`;
+            particle.style.top = `${posY + window.scrollY}px`;
+            particle.style.opacity = opacity;
+            particle.style.transform = `scale(${scale})`;
+            
+            if (opacity <= 0) {
+                clearInterval(anim);
+                particle.remove();
+            }
+        }, 30);
+    });
+}
+
+// Generador de la carita triste a feliz (Transición extendida a 10s)
+function spawnChangingFace(btn) {
+    const rect = btn.getBoundingClientRect();
+    const face = document.createElement('div');
+    face.className = 'changing-face-particle';
+    face.textContent = '😢';
+    
+    // Posicionar ligeramente arriba del botón
+    face.style.left = `${rect.left + rect.width / 2 - 15 + window.scrollX}px`;
+    face.style.top = `${rect.top - 30 + window.scrollY}px`;
+    
+    document.body.appendChild(face);
+
+    // Cambiar a neutral a los 3.3 segundos
+    setTimeout(() => { 
+        face.textContent = '😐'; 
+    }, 3300);
+    
+    // Cambiar a feliz a los 6.6 segundos
+    setTimeout(() => { 
+        face.textContent = '😊'; 
+    }, 6600);
+    
+    // Eliminar del DOM a los 10 segundos
+    setTimeout(() => { 
+        face.remove(); 
+    }, 10000);
+}
+
+// Generador del Monje Tibetano (Caminata a mitad de distancia, meditación hasta 10s)
+function spawnMonk(btn) {
+    // Eliminar monje previo si existe para evitar duplicados
+    const existingMonk = document.querySelector('.monk-container');
+    if (existingMonk) existingMonk.remove();
+
+    const rect = btn.getBoundingClientRect();
+    const monkContainer = document.createElement('div');
+    monkContainer.className = 'monk-container walking';
+    
+    // Desplazamiento a la mitad (caminata de 25px a 5px en lugar de 50px a 10px)
+    const startLeft = rect.right + 25 + window.scrollX;
+    const destLeft = rect.right + 5 + window.scrollX;
+    const topPos = rect.top - 2 + window.scrollY;
+
+    monkContainer.style.left = `${startLeft}px`;
+    monkContainer.style.top = `${topPos}px`;
+    
+    monkContainer.innerHTML = `
+        <div class="monk-aura"></div>
+        <div class="monk-character">
+            <div class="monk-head"></div>
+            <div class="monk-tunic"></div>
+            <div class="monk-legs">
+                <div class="leg left-leg"></div>
+                <div class="leg right-leg"></div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(monkContainer);
+
+    // Caminata lenta hacia el botón
+    setTimeout(() => {
+        monkContainer.style.left = `${destLeft}px`;
+    }, 50);
+
+    // Detenerse (sitting/meditating) tras 1.5 segundos
+    setTimeout(() => {
+        monkContainer.classList.remove('walking');
+        monkContainer.classList.add('meditating');
+    }, 1500);
+
+    // Desvanecer y retirar a los 10 segundos
+    setTimeout(() => {
+        monkContainer.style.opacity = '0';
+        setTimeout(() => monkContainer.remove(), 800);
+    }, 10000);
+}
+
+</script>
+</body>
+</html>
+

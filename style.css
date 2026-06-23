@@ -1,0 +1,1928 @@
+/* ==========================================
+   Bienestar y Plenitud Integral - Design System
+   ========================================== */
+
+/* Variables CSS */
+:root {
+    --bg-main: #f0f4f8; /* Fondo azul tenue */
+    --bg-card: rgba(255, 255, 255, 0.75); /* Tarjetas blancas translúcidas (glassmorphism) */
+    --bg-card-hover: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(20, 184, 166, 0.1);
+    --border-color-focus: rgba(20, 184, 166, 0.35);
+    
+    --color-primary: #14b8a6; /* Verde Aqua / Teal */
+    --color-primary-light: #2dd4bf;
+    --color-primary-dark: #0f766e;
+    
+    --color-success: #14b8a6; /* Verde Aqua */
+    --color-success-light: #0d9488;
+    --color-success-bg: rgba(20, 184, 166, 0.1);
+
+    --color-danger: #f97316; /* Naranja */
+    --color-danger-light: #ea580c;
+    --color-danger-bg: rgba(249, 115, 22, 0.1);
+    
+    --color-warning: #f59e0b;
+    --color-text-main: #1e293b; /* Texto principal oscuro */
+    --color-text-muted: #64748b; /* Texto secundario gris azulado */
+    
+    --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+    
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset y Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #e6f0fa 0%, #f0f4f8 100%); /* Fondo azul tenue radial/lineal */
+    color: var(--color-text-main);
+    min-height: 100vh;
+    padding: 1.5rem;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(20, 184, 166, 0.2);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+/* App Container Layout */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+}
+
+.brand-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.brand-logo {
+    max-height: 55px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+}
+
+.brand-logo:hover {
+    transform: scale(1.04);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo i {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+}
+
+.logo h1 span {
+    color: var(--color-primary);
+}
+
+/* Tab/Timeframe Selector */
+.timeframe-selector {
+    display: flex;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.btn-tab {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    padding: 0.6rem 1.2rem;
+    border-radius: 9px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-fast);
+}
+
+.btn-tab:hover {
+    color: var(--color-text-main);
+}
+
+.btn-tab.active {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.25);
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-left, .dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* KPI Container and Cards */
+.kpi-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .kpi-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.kpi-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+}
+
+.kpi-card:hover {
+    transform: translateY(-4px);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.balance-card::before {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+}
+.income-card::before {
+    background: var(--color-success);
+}
+.expense-card::before {
+    background: var(--color-danger);
+}
+
+.kpi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.kpi-header i {
+    font-size: 1.1rem;
+}
+
+.kpi-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+}
+
+.kpi-trend, .kpi-subtitle {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Glass Card */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 0.75rem;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #0f172a;
+}
+
+.card-header h2 i {
+    color: var(--color-primary);
+}
+
+/* Forms styling */
+.form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--color-text-main);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--border-color-focus);
+    background: #ffffff;
+}
+
+/* Toggle Switch / Checkbox Group */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--color-primary);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--color-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+    transition: var(--transition-fast);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.35);
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Charts Card styling */
+.charts-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Transaction List & Filter Bar */
+.filter-bar {
+    display: flex;
+    gap: 0.75rem;
+}
+
+@media (max-width: 480px) {
+    .filter-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.filter-bar input {
+    flex: 1;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.filter-bar select {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.transaction-list-wrapper {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.transaction-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.empty-list-msg {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2rem 0;
+    font-style: italic;
+}
+
+/* Transaction Item */
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    transition: var(--transition-fast);
+    animation: slideIn 0.3s ease-out;
+}
+
+.transaction-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(20, 184, 166, 0.15);
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.item-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.item-icon.income {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.item-icon.expense {
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+}
+
+.item-meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.item-meta span::after {
+    content: '•';
+    margin-left: 0.5rem;
+}
+
+.item-meta span:last-child::after {
+    content: '';
+}
+
+.item-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.item-amount {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.item-amount.income {
+    color: var(--color-success);
+}
+
+.item-amount.expense {
+    color: var(--color-danger);
+}
+
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.btn-delete:hover {
+    color: var(--color-danger);
+    background: rgba(249, 115, 22, 0.08);
+}
+
+/* Helpers */
+.text-success { color: var(--color-success) !important; }
+.text-danger { color: var(--color-danger) !important; }
+
+/* Micro-animations */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+.pulse-icon {
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    .app-header {
+        flex-direction: column;
+        gap: 1.25rem;
+        align-items: center;
+        text-align: center;
+    }
+    .brand-logo-container {
+        justify-content: center;
+        width: 100%;
+    }
+    .timeframe-selector {
+        width: 100%;
+    }
+    .btn-tab {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   Videos Section & Cards
+   ========================================== */
+.videos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.add-video-bar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.add-video-bar input {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 220px;
+}
+
+.btn-add-video {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    box-shadow: 0 2px 8px rgba(20, 184, 166, 0.2);
+    transition: var(--transition-fast);
+}
+
+.btn-add-video:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.35);
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.video-card-item {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.video-card-item:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: var(--shadow-md);
+}
+
+.video-thumbnail-container {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background: #000;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.video-card-item:hover .video-thumbnail {
+    transform: scale(1.05);
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: var(--transition-fast);
+}
+
+.play-overlay i {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: var(--transition-fast);
+}
+
+.video-thumbnail-container:hover .play-overlay {
+    background: rgba(15, 23, 42, 0.4);
+    opacity: 1;
+}
+
+.video-thumbnail-container:hover .play-overlay i {
+    transform: scale(1.15);
+    color: var(--color-primary-light);
+}
+
+.video-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+}
+
+.video-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.3;
+}
+
+.video-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.video-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.btn-watch {
+    background: transparent;
+    border: none;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0;
+}
+
+.btn-watch:hover {
+    color: var(--color-primary);
+}
+
+.btn-delete-video {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.btn-delete-video:hover {
+    color: var(--color-danger);
+    background: var(--color-danger-bg);
+}
+
+/* Modal Player styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #000;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2.2rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--color-primary-light);
+    transform: scale(1.1);
+}
+
+.video-iframe-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.video-iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .videos-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .add-video-bar {
+        width: 100%;
+    }
+    .add-video-bar input {
+        flex: 1;
+        min-width: auto;
+    }
+}
+
+/* ==========================================
+   Secciones de Salud - Navigation Bar
+   ========================================== */
+.health-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+}
+
+.health-btn {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--color-text-muted);
+    padding: 0.9rem 1.8rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: visible;
+}
+
+.health-btn:hover {
+    color: var(--color-text-main);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--bg-card-hover);
+}
+
+/* Active buttons styling */
+.health-btn.active#btn-financiera {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);
+}
+
+.health-btn.active#btn-emocional {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.health-btn.active#btn-espiritual {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+}
+
+/* Glowing effects on click */
+.health-btn.glow-financiera {
+    animation: buttonGlowFinanciera 2s ease-in-out 5;
+}
+@keyframes buttonGlowFinanciera {
+    0%, 100% { box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(20, 184, 166, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+.health-btn.glow-emocional {
+    animation: buttonGlowEmocional 2s ease-in-out 5;
+}
+@keyframes buttonGlowEmocional {
+    0%, 100% { box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+.health-btn.glow-espiritual {
+    animation: buttonGlowEspiritual 2s ease-in-out 5;
+}
+@keyframes buttonGlowEspiritual {
+    0%, 100% { box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(249, 115, 22, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+/* ==========================================
+   Animaciones & Partículas (JS Spawners)
+   ========================================== */
+.sparkle-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1100;
+    font-size: 1.4rem;
+    animation: none; /* Controlado dinámicamente por JS */
+}
+
+.changing-face-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1100;
+    font-size: 2.2rem;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+    animation: floatUpAndChange 10s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes floatUpAndChange {
+    0% { transform: translateY(0) scale(0.6); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-40px) scale(1.3); opacity: 0; }
+}
+
+/* ==========================================
+   Tibetan Monk Animation
+   ========================================== */
+.monk-container {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1050;
+    width: 32px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+}
+
+.monk-character {
+    width: 24px;
+    height: 38px;
+    position: relative;
+    z-index: 2;
+}
+
+.monk-head {
+    width: 12px;
+    height: 12px;
+    background: #ffd3b6;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Cara sonriente del monje */
+.monk-head::before {
+    content: '◡';
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    font-size: 8px;
+    color: #475569;
+    font-weight: bold;
+}
+
+.monk-tunic {
+    width: 18px;
+    height: 20px;
+    background: #f97316; /* Túnica naranja */
+    border-radius: 6px 6px 2px 2px;
+    margin: -1px auto 0;
+    position: relative;
+    border-left: 3px solid #ea580c; /* Detalle de doble pliegue */
+}
+
+.monk-legs {
+    display: flex;
+    justify-content: space-between;
+    width: 16px;
+    margin: 0 auto;
+    position: relative;
+    z-index: -1;
+}
+
+.monk-legs .leg {
+    width: 6px;
+    height: 8px;
+    background: #ea580c;
+    border-radius: 0 0 2px 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animaciones del Monje Caminando */
+.monk-container.walking {
+    animation: walkBob 0.25s infinite alternate ease-in-out;
+}
+@keyframes walkBob {
+    from { transform: translateY(0); }
+    to { transform: translateY(-3px); }
+}
+
+.monk-container.walking .left-leg {
+    animation: swingLeft 0.25s infinite alternate ease-in-out;
+}
+@keyframes swingLeft {
+    from { transform: rotate(-25deg); }
+    to { transform: rotate(25deg); }
+}
+
+.monk-container.walking .right-leg {
+    animation: swingRight 0.25s infinite alternate ease-in-out;
+}
+@keyframes swingRight {
+    from { transform: rotate(25deg); }
+    to { transform: rotate(-25deg); }
+}
+
+/* Animaciones del Monje Meditando */
+.monk-container.meditating {
+    animation: levitate 2s infinite ease-in-out alternate;
+}
+@keyframes levitate {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3.5px); }
+}
+
+/* Piernas cruzadas al meditar */
+.monk-container.meditating .monk-legs {
+    width: 26px;
+    margin-top: -2px;
+}
+.monk-container.meditating .leg {
+    height: 4px;
+    width: 12px;
+    border-radius: 4px;
+}
+.monk-container.meditating .left-leg {
+    transform: rotate(15deg);
+    margin-right: -4px;
+}
+.monk-container.meditating .right-leg {
+    transform: rotate(-15deg);
+    margin-left: -4px;
+}
+
+/* Aura espiritual de meditación */
+.monk-aura {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 44px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px dashed rgba(249, 115, 22, 0.4);
+    opacity: 0;
+    display: none;
+    z-index: 1;
+}
+
+.monk-container.meditating .monk-aura {
+    display: block;
+    animation: auraPulse 2s infinite ease-out;
+}
+
+@keyframes auraPulse {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.8;
+        border-color: rgba(249, 115, 22, 0.5);
+        box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+        border-color: rgba(251, 146, 60, 0);
+        box-shadow: 0 0 25px rgba(249, 115, 22, 0);
+    }
+}
+
+/* ==========================================
+   Page Sections Layout & Common Styles
+   ========================================== */
+.page-section {
+    animation: sectionFadeIn 0.4s ease-out forwards;
+    width: 100%;
+}
+
+@keyframes sectionFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title-wrapper {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 1rem;
+}
+
+.section-title-wrapper h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #0f172a;
+    margin-bottom: 0.35rem;
+}
+
+.section-title-wrapper p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.text-brain { color: #6366f1 !important; }
+.text-spiritual { color: #f97316 !important; }
+
+.subsection-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.subsection-title i {
+    color: var(--color-primary);
+}
+
+/* ==========================================
+   Books Grid & 3D Cards
+   ========================================== */
+.books-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.book-card {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 1.75rem;
+    transition: var(--transition-normal);
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 640px) {
+    .book-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+}
+
+/* 3D Book Jacket Effect */
+.book-cover-wrapper {
+    width: 130px;
+    height: 190px;
+    border-radius: 4px 10px 10px 4px;
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    box-shadow: 8px 8px 18px rgba(15, 23, 42, 0.18);
+    overflow: hidden;
+}
+
+.book-spine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.22);
+    z-index: 2;
+}
+
+.book-cover-content {
+    width: 100%;
+    height: 100%;
+    padding: 1.25rem 0.75rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    text-align: left;
+}
+
+.book-cover-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.book-cover-author {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Libros Cobertores Degradados Personalizados */
+.agreement-cover {
+    background: linear-gradient(135deg, #8d6e63 0%, #3e2723 100%);
+    border-right: 3px solid #3e2723;
+}
+.intelligence-cover {
+    background: linear-gradient(135deg, #3f51b5 0%, #1a237e 100%);
+    border-right: 3px solid #1a237e;
+}
+.subtle-cover {
+    background: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
+    border-right: 3px solid #1f2937;
+}
+.power-cover {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+    border-right: 3px solid #0369a1;
+}
+.siddhartha-cover {
+    background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+    border-right: 3px solid #b45309;
+}
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+}
+
+.book-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.book-author {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.book-review {
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--color-primary);
+    margin: 0.5rem 0 0.8rem;
+    line-height: 1.45;
+}
+
+#section-emocional .book-review {
+    border-left-color: #6366f1; /* Color índigo para emocional */
+}
+
+#section-espiritual .book-review {
+    border-left-color: #f97316; /* Color naranja para espiritual */
+}
+
+/* Botón de Reseña de Video */
+.btn-video-review {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: fit-content;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+    transition: var(--transition-fast);
+}
+
+.btn-video-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.35);
+    background: linear-gradient(135deg, #f87171, #ef4444);
+}
+
+.btn-video-review:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   Meditations Grid & Cards
+   ========================================== */
+.meditations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.meditation-card {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.meditation-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: var(--shadow-md);
+}
+
+.meditation-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background: #000;
+    overflow: hidden;
+}
+
+.meditation-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.meditation-card:hover .meditation-thumbnail {
+    transform: scale(1.05);
+}
+
+.meditation-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: var(--transition-fast);
+}
+
+.meditation-play-overlay i {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    transition: var(--transition-fast);
+}
+
+.meditation-card:hover .meditation-play-overlay {
+    background: rgba(15, 23, 42, 0.35);
+    opacity: 1;
+}
+
+.meditation-card:hover .meditation-play-overlay i {
+    transform: scale(1.15);
+    color: #f97316;
+}
+
+.meditation-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.meditation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.3;
+}
+
+.meditation-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+}
+
+/* ==========================================
+   Spiritual Health - Meditations & Comments
+   ========================================== */
+.add-meditation-bar {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.add-meditation-bar input {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 220px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--color-text-main);
+    transition: var(--transition-fast);
+}
+.add-meditation-bar input:focus {
+    outline: none;
+    border-color: #f97316;
+    background: white;
+}
+.btn-add-meditation {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+.btn-add-meditation:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+.meditation-comments-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #f97316;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.55rem 0 0.25rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 0.5rem;
+    transition: var(--transition-fast);
+}
+.meditation-comments-toggle:hover {
+    opacity: 0.8;
+}
+.meditation-comments-panel {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-top: 0.75rem;
+}
+.meditation-comments-panel.active {
+    display: flex;
+}
+.comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+.comments-list::-webkit-scrollbar {
+    width: 4px;
+}
+.comments-list::-webkit-scrollbar-thumb {
+    background-color: rgba(249, 115, 22, 0.2);
+    border-radius: 4px;
+}
+.comment-item {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    background: rgba(249, 115, 22, 0.04);
+    border-left: 2px solid #f97316;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    color: var(--color-text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+.comment-text {
+    word-break: break-word;
+}
+.comment-meta {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-align: right;
+}
+.comment-form {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+}
+.comment-input {
+    flex: 1;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-main);
+    transition: var(--transition-fast);
+}
+.comment-input:focus {
+    outline: none;
+    border-color: #f97316;
+    background: white;
+}
+.btn-submit-comment {
+    background: #f97316;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.btn-submit-comment:hover {
+    background: #ea580c;
+    transform: scale(1.05);
+}
+.no-comments-msg {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .health-nav {
+        gap: 0.75rem;
+    }
+    .health-btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+    }
+    .add-meditation-bar {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .add-meditation-bar input {
+        min-width: auto;
+    }
+}
+
+/* ==========================================
+   Portada - Chi Bienestar
+   ========================================== */
+.health-btn.active#btn-inicio {
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+.health-btn.glow-inicio {
+    animation: buttonGlowInicio 2s ease-in-out 5;
+}
+
+@keyframes buttonGlowInicio {
+    0%, 100% { box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3); }
+    50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.8), inset 0 0 10px rgba(255,255,255,0.6); }
+}
+
+.welcome-section {
+    position: relative;
+    padding: 3.5rem 2.5rem;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%); /* Fondo azul claro y aqua */
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.welcome-hero {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
+    z-index: 1;
+}
+
+.welcome-icon {
+    font-size: 4rem;
+    color: #0f766e;
+    margin-bottom: 0.25rem;
+    animation: pulseIcon 3s infinite ease-in-out;
+}
+
+.welcome-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+}
+
+.welcome-subtitle {
+    font-size: 1.15rem;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.welcome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    z-index: 1;
+}
+
+.welcome-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2.25rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+.welcome-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-lg);
+}
+
+.welcome-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.welcome-card-header i {
+    font-size: 2rem;
+}
+
+.welcome-card-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.welcome-card-text {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.btn-welcome {
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: white;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-welcome:hover {
+    transform: translateY(-2px);
+}
+
+/* Bordes y textos por sección */
+.border-financiera {
+    border-left: 5px solid #14b8a6;
+}
+.text-financiera {
+    color: #0f766e;
+}
+.btn-financiera-welcome {
+    background: linear-gradient(135deg, #14b8a6, #0f766e);
+}
+.btn-financiera-welcome:hover {
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+}
+
+.border-emocional {
+    border-left: 5px solid #6366f1;
+}
+.text-emocional {
+    color: #4f46e5;
+}
+.btn-emocional-welcome {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+.btn-emocional-welcome:hover {
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.border-espiritual {
+    border-left: 5px solid #f97316;
+}
+.text-espiritual {
+    color: #ea580c;
+}
+.btn-espiritual-welcome {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+}
+.btn-espiritual-welcome:hover {
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+}
+
+/* Decoraciones de Fondo para Portada */
+.home-bg-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.home-spiral {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    color: rgba(20, 184, 166, 0.12); /* Aqua claro con baja opacidad */
+}
+
+.home-spiral-1 {
+    top: -150px;
+    left: -150px;
+    transform: rotate(15deg);
+}
+
+.home-spiral-2 {
+    bottom: -150px;
+    right: -150px;
+    transform: rotate(195deg);
+}
+
+.orange-flare {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.18) 0%, rgba(249, 115, 22, 0) 70%);
+    filter: blur(60px);
+}
+
+.flare-1 {
+    top: 5%;
+    right: 5%;
+}
+
+.flare-2 {
+    bottom: 10%;
+    left: 5%;
+}
+
+@media (max-width: 950px) {
+    .welcome-grid {
+        grid-template-columns: 1fr;
+    }
+    .welcome-section {
+        padding: 2rem 1.5rem;
+    }
+    .welcome-hero {
+        padding: 2rem;
+    }
+    .welcome-title {
+        font-size: 2.25rem;
+    }
+}
+
+

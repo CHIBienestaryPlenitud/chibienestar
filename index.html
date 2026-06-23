@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienestar y Plenitud Integral</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Header -->
+        <header class="app-header">
+            <div class="logo" onclick="switchSection('inicio')" style="cursor: pointer;">
+                <i class="fa-solid fa-spa pulse-icon"></i>
+                <h1>Bienestar y <span>Plenitud</span></h1>
+            </div>
+            <div class="timeframe-selector">
+                <button id="btn-semanal" class="btn-tab active" onclick="changeTimeframe('semanal')">
+                    <i class="fa-solid fa-calendar-week"></i> Semanal
+                </button>
+                <button id="btn-mensual" class="btn-tab" onclick="changeTimeframe('mensual')">
+                    <i class="fa-solid fa-calendar-days"></i> Mensual
+                </button>
+            </div>
+            <div class="brand-logo-container">
+                <img src="logo.png" alt="CHI México Logo" class="brand-logo">
+            </div>
+        </header>
+
+        <!-- Barra de Navegación de Secciones de Salud CHI -->
+        <nav class="health-nav">
+            <button class="health-btn active" id="btn-inicio" onclick="switchSection('inicio')">
+                <i class="fa-solid fa-house"></i> Inicio
+            </button>
+            <button class="health-btn" id="btn-financiera" onclick="switchSection('financiera')">
+                <i class="fa-solid fa-scale-balanced"></i> Salud Financiera
+            </button>
+            <button class="health-btn" id="btn-emocional" onclick="switchSection('emocional')">
+                <i class="fa-solid fa-brain"></i> Salud Emocional
+            </button>
+            <button class="health-btn" id="btn-espiritual" onclick="switchSection('espiritual')">
+                <i class="fa-solid fa-om"></i> Salud Espiritual
+            </button>
+        </nav>
+
+        <main class="app-main-content">
+            <!-- SECCIÓN 0: INICIO (PORTADA CHI BIENESTAR) -->
+            <div id="section-inicio" class="welcome-section">
+                <div class="home-bg-decorations">
+                    <!-- Espirales Archimedean SVG (Siluetas ligeras) -->
+                    <svg class="home-spiral home-spiral-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50,50 A 5,5 0 0,1 45,50 A 10,10 0 0,0 55,50 A 15,15 0 0,1 35,50 A 20,20 0 0,0 65,50 A 25,25 0 0,1 25,50 A 30,30 0 0,0 75,50 A 35,35 0 0,1 15,50 A 40,40 0 0,0 85,50" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                    </svg>
+                    <svg class="home-spiral home-spiral-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50,50 A 5,5 0 0,1 45,50 A 10,10 0 0,0 55,50 A 15,15 0 0,1 35,50 A 20,20 0 0,0 65,50 A 25,25 0 0,1 25,50 A 30,30 0 0,0 75,50 A 35,35 0 0,1 15,50 A 40,40 0 0,0 85,50" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                    </svg>
+                    <!-- Destellos naranja difuminados -->
+                    <div class="orange-flare flare-1"></div>
+                    <div class="orange-flare flare-2"></div>
+                </div>
+
+                <div class="welcome-hero">
+                    <i class="fa-solid fa-spa welcome-icon"></i>
+                    <h2 class="welcome-title">Chi Bienestar</h2>
+                    <p class="welcome-subtitle">Te damos la bienvenida a tu portal de transformación. Un espacio diseñado para quienes buscan elevar su calidad de vida e integrar de manera práctica el bienestar en su día a día.</p>
+                </div>
+
+                <div class="welcome-grid">
+                    <!-- Salud Financiera Card -->
+                    <div class="welcome-card glass-card border-financiera">
+                        <div class="welcome-card-header text-financiera">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                            <h3>Salud Financiera</h3>
+                        </div>
+                        <p class="welcome-card-text">Aprende qué es un flujo de efectivo y cómo registrar tus movimientos para administrar mejor tus recursos económicos y reducir el estrés financiero.</p>
+                        <button class="btn-welcome btn-financiera-welcome" onclick="switchSection('financiera')">
+                            <i class="fa-solid fa-chart-line"></i> Explorar Salud Financiera
+                        </button>
+                    </div>
+
+                    <!-- Salud Emocional Card -->
+                    <div class="welcome-card glass-card border-emocional">
+                        <div class="welcome-card-header text-emocional">
+                            <i class="fa-solid fa-brain"></i>
+                            <h3>Salud Emocional</h3>
+                        </div>
+                        <p class="welcome-card-text">Descubre herramientas de mindfulness, técnicas de identificación de emociones y reseñas literarias y en video para comprender la inteligencia emocional en momentos de incertidumbre.</p>
+                        <button class="btn-welcome btn-emocional-welcome" onclick="switchSection('emocional')">
+                            <i class="fa-solid fa-heart"></i> Explorar Salud Emocional
+                        </button>
+                    </div>
+
+                    <!-- Salud Espiritual Card -->
+                    <div class="welcome-card glass-card border-espiritual">
+                        <div class="welcome-card-header text-espiritual">
+                            <i class="fa-solid fa-om"></i>
+                            <h3>Salud Espiritual</h3>
+                        </div>
+                        <p class="welcome-card-text">Encuentra paz interior, explora lecturas inspiradoras y accede a meditaciones guiadas y sonidos armónicos para nutrir tu crecimiento y evolución espiritual.</p>
+                        <button class="btn-welcome btn-espiritual-welcome" onclick="switchSection('espiritual')">
+                            <i class="fa-solid fa-spa"></i> Explorar Salud Espiritual
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 1: SALUD FINANCIERA -->
+            <div id="section-financiera" class="dashboard-grid" style="display: none;">
+            
+            <!-- Column Left: KPI Cards & Form -->
+            <section class="dashboard-left">
+                <!-- KPI Summary Cards -->
+                <div class="kpi-container">
+                    <div class="kpi-card balance-card">
+                        <div class="kpi-header">
+                            <span>Flujo de Efectivo Neto</span>
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div class="kpi-value" id="total-balance">$0.00</div>
+                        <div class="kpi-trend" id="balance-trend">
+                            <i class="fa-solid fa-circle-info"></i> Balance general disponible
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card income-card">
+                        <div class="kpi-header">
+                            <span>Total Ingresos</span>
+                            <i class="fa-solid fa-circle-arrow-up text-success"></i>
+                        </div>
+                        <div class="kpi-value text-success" id="total-income">$0.00</div>
+                        <div class="kpi-subtitle" id="income-count">0 transacciones</div>
+                    </div>
+
+                    <div class="kpi-card expense-card">
+                        <div class="kpi-header">
+                            <span>Total Egresos</span>
+                            <i class="fa-solid fa-circle-arrow-down text-danger"></i>
+                        </div>
+                        <div class="kpi-value text-danger" id="total-expense">$0.00</div>
+                        <div class="kpi-subtitle" id="expense-count">0 transacciones</div>
+                    </div>
+                </div>
+
+                <!-- Transaction Input Form Card -->
+                <div class="glass-card form-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-plus-minus"></i> Registrar Transacción</h2>
+                    </div>
+                    <form id="transaction-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="type">Tipo de Flujo</label>
+                                <select id="type" required onchange="updateCategories()">
+                                    <option value="ingreso" selected>Ingreso (+)</option>
+                                    <option value="egreso">Egreso (-)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Monto ($)</label>
+                                <input type="number" id="amount" step="0.01" min="0.01" placeholder="0.00" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <input type="text" id="description" placeholder="Ej. Sueldo, Supermercado, Alquiler..." required autocomplete="off">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="category">Categoría</label>
+                                <select id="category" required>
+                                    <!-- Dynamic options injected by JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Fecha</label>
+                                <input type="date" id="date" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="recurring" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="checkbox-label">Transacción Recurrente (Aplica a la vista de flujo continuo)</span>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Agregar al Flujo
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Column Right: Charts & Transaction History -->
+            <section class="dashboard-right">
+                <!-- Analytics Cards -->
+                <div class="glass-card charts-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-chart-pie"></i> Análisis de Flujo</h2>
+                    </div>
+                    <div class="charts-container">
+                        <div class="chart-wrapper">
+                            <canvas id="bar-chart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="doughnut-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction List Card -->
+                <div class="glass-card list-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-list-check"></i> Historial de Movimientos</h2>
+                        <div class="filter-bar">
+                            <input type="text" id="search-input" placeholder="Buscar transacción..." oninput="filterTransactions()">
+                            <select id="category-filter" onchange="filterTransactions()">
+                                <option value="all">Todas las categorías</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="transaction-list-wrapper">
+                        <ul id="transaction-list" class="transaction-list">
+                            <!-- Injected dynamically by JS -->
+                            <li class="empty-list-msg">No hay transacciones registradas para este periodo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Educación Financiera y Videos -->
+            <section class="glass-card videos-card" style="grid-column: 1 / -1;">
+                <div class="card-header videos-header">
+                    <h2><i class="fa-solid fa-graduation-cap"></i> Educación Financiera & Recursos</h2>
+                    <div class="add-video-bar">
+                        <input type="text" id="video-url" placeholder="Pegar enlace de YouTube (https://...)">
+                        <input type="text" id="video-title" placeholder="Título personalizado (opcional)">
+                        <button onclick="addCustomVideo()" class="btn-add-video" title="Agregar video">
+                            <i class="fa-solid fa-plus"></i> Añadir
+                        </button>
+                    </div>
+                </div>
+                <div class="videos-grid" id="videos-grid">
+                    <!-- Dinámico por JS -->
+                </div>
+            </section>
+        </div> <!-- Fin SECCIÓN 1: Salud Financiera -->
+
+        <!-- SECCIÓN 2: SALUD EMOCIONAL -->
+        <div id="section-emocional" class="page-section" style="display: none;">
+            <div class="section-title-wrapper">
+                <h2><i class="fa-solid fa-brain text-brain"></i> Salud Emocional</h2>
+                <p>Explora recomendaciones de libros con reseñas escritas y reseñas en formato de video para cultivar tu bienestar mental y equilibrio emocional.</p>
+            </div>
+            
+            <div class="books-grid">
+                <!-- Libro 1 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper agreement-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">Los Cuatro Acuerdos</span>
+                            <span class="book-cover-author">Dr. Miguel Ruiz</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">Los Cuatro Acuerdos</h3>
+                        <p class="book-author">por Dr. Miguel Ruiz</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Una guía práctica para la libertad personal basada en la antigua sabiduría tolteca. El autor nos invita a romper con creencias limitantes que absorben nuestra energía y nos propone adoptar cuatro acuerdos sencillos pero sumamente poderosos: ser impecable con las palabras, no tomarse nada de manera personal, no hacer suposiciones y dar siempre el máximo esfuerzo en todo lo que hagamos. Una lectura transformadora indispensable para aliviar la carga mental cotidiana.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('qC8tQ4E-0zM')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Libro 2 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper intelligence-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">Inteligencia Emocional</span>
+                            <span class="book-cover-author">Daniel Goleman</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">Inteligencia Emocional</h3>
+                        <p class="book-author">por Daniel Goleman</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>La obra fundamental que redefinió el concepto de éxito y felicidad. Daniel Goleman demuestra cómo el coeficiente intelectual no es una métrica suficiente para predecir el triunfo en la vida personal y laboral, y cómo el autoconocimiento, la autorregulación emocional, la motivación, la empatía y las habilidades sociales son determinantes para nuestra salud mental y nuestras relaciones. Un libro esclarecedor cargado de base científica.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('f_X5pPjYm-M')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Libro 3 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper subtle-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">El sutil arte de que casi todo te importe una mi*rda</span>
+                            <span class="book-cover-author">Mark Manson</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">El sutil arte de que casi todo te importe una mi*rda</h3>
+                        <p class="book-author">por Mark Manson</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Un enfoque sumamente honesto y rompedor para el crecimiento personal. Manson desafía los clichés de la autoayuda convencional recordándonos que el sufrimiento y los problemas son parte natural de la vida. La verdadera paz mental y emocional no radica en evitar los problemas, sino en elegir con sabiduría qué es lo que realmente nos importa y dejar ir las batallas sin sentido. Divertido, provocador y liberador.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('v2kZzG5X_yU')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: SALUD ESPIRITUAL -->
+        <div id="section-espiritual" class="page-section" style="display: none;">
+            <div class="section-title-wrapper">
+                <h2><i class="fa-solid fa-om text-spiritual"></i> Salud Espiritual</h2>
+                <p>Encuentra paz interior, conéctate contigo mismo a través de lecturas seleccionadas y meditaciones guiadas de YouTube.</p>
+            </div>
+
+            <!-- Lecturas Recomendadas -->
+            <h3 class="subsection-title"><i class="fa-solid fa-book-open"></i> Lecturas Espirituales Recomendadas</h3>
+            <div class="books-grid">
+                <!-- Libro 1 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper power-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">El Poder del Ahora</span>
+                            <span class="book-cover-author">Eckhart Tolle</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">El Poder del Ahora</h3>
+                        <p class="book-author">por Eckhart Tolle</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Un manual indispensable para la iluminación espiritual y el despertar interior. Eckhart Tolle nos guía a través de un viaje profundo para comprender cómo el ego sabotea nuestra felicidad y cómo anclarnos en el momento presente (el "Ahora") extingue el sufrimiento mental. Una lectura profunda que transmite paz desde el primer capítulo y enseña a vivir sin ansiedad.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('u4hDlhQ4m9w')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Libro 2 -->
+                <div class="book-card glass-card">
+                    <div class="book-cover-wrapper siddhartha-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-cover-content">
+                            <span class="book-cover-title">Siddhartha</span>
+                            <span class="book-cover-author">Hermann Hesse</span>
+                        </div>
+                    </div>
+                    <div class="book-details">
+                        <h3 class="book-title">Siddhartha</h3>
+                        <p class="book-author">por Hermann Hesse</p>
+                        <div class="book-review">
+                            <strong>Reseña Escrita:</strong>
+                            <p>Una novela lírica y poética ambientada en la India en tiempos de Buda. Cuenta el viaje espiritual de Siddhartha, un joven que busca la verdad última a través del ascetismo, las riquezas del comercio, los placeres amorosos y la contemplación de la naturaleza junto a un río. Hesse nos muestra de forma magistral cómo la verdadera sabiduría no se transmite por dogmas, sino mediante la experiencia personal de la vida.</p>
+                        </div>
+                        <button class="btn-video-review" onclick="playVideo('V4y7Y2jO-mU')">
+                            <i class="fa-solid fa-circle-play"></i> Ver Reseña en Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meditaciones -->
+            <div class="meditations-header-bar" style="margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <h3 class="subsection-title" style="margin: 0;"><i class="fa-solid fa-spa"></i> Meditaciones Guiadas y Sonidos de Relajación</h3>
+                <div class="add-meditation-bar">
+                    <input type="text" id="meditation-url" placeholder="Enlace de YouTube de la Comunidad...">
+                    <input type="text" id="meditation-title" placeholder="Título de meditación...">
+                    <button onclick="addCustomMeditation()" class="btn-add-meditation" title="Añadir meditación">
+                        <i class="fa-solid fa-plus"></i> Añadir
+                    </button>
+                </div>
+            </div>
+            <div class="meditations-grid" id="meditations-grid">
+                <!-- Injected dynamically by JS -->
+            </div>
+        </div>
+    </main>
+</div>
+
+    <!-- Modal Reproductor de Video -->
+    <div id="video-modal" class="modal" onclick="closeVideoModal(event)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeVideoModal(event)">&times;</button>
+            <div class="video-iframe-container">
+                <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
